@@ -1,0 +1,24 @@
+issuer: MARKANT_DE
+name: Retoure
+category: [return, quality, rebuild]
+kind: debit
+template_id: 141001DE008
+
+inclusive_keywords:
+  - Markant
+  - Beleg.*?WR
+
+exclusive_keywords:
+  - RÜCKBELASTUNG
+
+fields:
+  archive_number: Archivnummer.*?(\d+)
+  document_number: Beleg.*Nr.*?(\w+)
+  supplier: Warenempfänger\s*(\d+)
+  tax: GESAMT\s*EUR(?:\s*(?:\d+\.)?\d+.\d+.?\s*){1,2}((?:\d+\.)?\d+.\d+)
+  reason: OP.*?Nummer.*((?:.*\n)+?)GTIN
+  amount: GESAMT.*?([\d.,]*\d{2})-\n
+  email: ([\w.-]+@\s?\S+?)\.?$
+
+optional_fields:
+  - email

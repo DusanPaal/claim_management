@@ -1,0 +1,28 @@
+issuer: BAHAG_DE
+name: Belastungsanzeige aus Retoure
+category: [return, quality, rebuild]
+kind: debit
+template_id: 101001DE015
+
+inclusive_keywords:
+  - BAHAG|Bahag|Baus|BAUS|BAUHAUS
+  - Belastungsanzeige
+  - Retoure
+
+exclusive_keywords:
+  - Storno
+  - TSCHECH|Tschech
+  - "[Ee]rsetzt|Erst.|ERSETZT" # do not process these docs!!!
+
+fields:
+  document_number:
+    - aus Retoure[\s\n]?.*?(\d{12})
+    - aus Retoure\n.*\n(\d{12})
+  branch: Niederlassung\s+(\d+)
+  amount: Gesamtbetrag\s+EUR\s+(\d*\.?\d+,\d+)
+  supplier: Lieferant.*?\s([1-9]\d{5})\D
+  tax: zuzüglich\s+Mwst.\s+(\d*\.?\d+,\d+)\s+%
+  reason: Bemerkung[\s:]*(.*?)[\s\W\n]*Retourengrund[\s:]*(.*)
+
+optional_fields:
+  - tax

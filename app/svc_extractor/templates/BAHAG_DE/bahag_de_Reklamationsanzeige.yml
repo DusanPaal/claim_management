@@ -1,0 +1,27 @@
+issuer: BAHAG_DE
+name: Reklamationsanzeige
+category: price
+kind: debit
+template_id: 101001DE013
+
+inclusive_keywords:
+  - BAHAG|Bahag|Baus|BAUS|BAUHAUS
+  - Reklamationsanzeige
+
+exclusive_keywords:
+  - TSCHECH|Tschech
+  - Storno
+  - "[Ee]rsetzt|Erst.|ERSETZT" # do not process these docs!!!
+
+fields:
+  supplier: Lieferant.*?\s([1-9]\d{5})\D
+  document_number: Ihre Rechnungs-Nr.\s+(\d{9})
+  invoice_number: Ihre Rechnungs-Nr.\s+(\d{9})
+  branch: Niederlassung\s*(\d{3})
+  amount: Gesamtbetrag\s*EUR\s*(\d+\.?\d*,\d+)
+  tax: zuzüglich\s+Mwst.\s+(\d*\.?\d+,\d+)\s+%
+  items: (\d{3})\s*(\d{8})\s*(.*)\s*(\d+)\s*(\d+)\s*(\w+)\s*(\d+\.?\d+,\d+)\s+(\d+\.?\d+,\d+)\s+(\d+\.?,\d+)
+
+optional_fields:
+  - items
+  - tax

@@ -1,0 +1,17 @@
+issuer: OBI_SI
+name: Rechnung aus Warenretoure
+category: return # quality applied manually by user
+kind: debit
+template_id: 161072SI004
+
+inclusive_keywords:
+  - OBI
+  - Rechnung
+  - Warenretoure
+  - Ljubljana
+
+fields:
+  branch: R.*Ein.*?\s*?(\d{3})
+  supplier: Lieferant.*?(\d{4})
+  document_number: Rechnung.*?Nr.*?0+(\d+)
+  amount: Gesamt.*?\n?.*?[Bb]etra.*?\n?.*?(\d+[.,]\d+)

@@ -1,0 +1,18 @@
+issuer: BAHAG_SI
+name: Minderlieferung
+category: [penalty_general, penalty_quote, penalty_delay]
+kind: debit
+template_id: 101072SI003
+
+inclusive_keywords:
+  - Belastungsanzeige
+  - Minderlieferung
+
+exclusive_keywords:
+  - "[Ee]rsetzt|Erst.|ERSETZT" # do not process these docs!!!
+
+fields:
+  document_number: (?:Belegnummer\s+|Rechnungsnummer\s+|[Nn]ummer\s+)(\d{10}|\d{7})
+  supplier: Lieferant.*?(\d+)
+  amount: Belastungsbetrag.*?EUR\s*(\d*?\.?\d*,\d+)
+  subtotals: Zwischensumme\s*(?:.*?,\d{2})\s*(.*?,\d{2}) # lieferverzug / lieferquote / rovknake = 10

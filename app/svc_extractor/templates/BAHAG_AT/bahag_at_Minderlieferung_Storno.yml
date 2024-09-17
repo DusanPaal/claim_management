@@ -1,0 +1,18 @@
+issuer: BAHAG_AT
+name: Storno-Minderlieferung
+kind: credit
+template_id: 101072AT008
+
+inclusive_keywords:
+  - BAHAG|Bahag|Baus|BAUS|BAUHAUS
+  - Belastungsanzeige
+  - Minderlieferung
+  - Storno
+
+fields:
+  document_number: Nummer.*?(\d+)
+  backreference_number: Referenz\s+(\d+)
+  supplier: 
+    - \n\s+Lieferant.*?\s([1-9]\d{5})\D
+    - Lieferant.*?\s([1-9]\d{5})\D
+  amount: Gutschriftsbetrag.*?EUR\s*(\d*?\.?\d*,\d+)

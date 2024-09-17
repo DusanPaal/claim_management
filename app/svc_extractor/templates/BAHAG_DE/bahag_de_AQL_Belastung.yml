@@ -1,0 +1,19 @@
+issuer: BAHAG_DE
+name: AQL-Belastung
+category: penalty_general
+kind: debit
+template_id: 101001DE016
+
+inclusive_keywords:
+  - BAHAG|Bahag|Baus|BAUS|BAUHAUS
+  - AQL-Belastung
+
+exclusive_keywords:
+  - Storno
+  - TSCHECH|Tschech
+  - "[Ee]rsetzt|Erst.|ERSETZT" # do not process these docs!!!
+
+fields:
+  document_number: (?:Belegnummer\s+|Rechnungsnummer\s+|[Nn]ummer\s+)(\d{10}|\d{7})
+  supplier: Lieferant.*?\s([1-9]\d{5})\D
+  amount: Gesamtbetrag.*?EUR\s*(\d*?\.?\d*,\d+)

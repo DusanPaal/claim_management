@@ -1,0 +1,23 @@
+issuer: MARKANT_AT
+name: Retoure
+category: [quality, return]
+kind: debit
+template_id: 141072AT004
+
+inclusive_keywords:
+  - Markant
+  - Beleg.*?WR
+  - Österreich
+
+exclusive_keywords:
+  - RÜCKBELASTUNG
+
+fields:
+  archive_number: Archivnummer.*?(\d+)
+  document_number: Beleg.*Nr.*?(\d*WR\d*)
+  supplier: Warenempfänger\s*(\d+)
+  branch: Urspr.Datum.*-Nr.*?(\d{3})
+  reason: OP.*?Nummer.*((?:.*\n)+?)GTIN
+  amount:
+    - GESAMT\s*EUR(?:\s*(?:\d+\.)?\d+.\d+.?\s*){1,3}((?:\d+\.)?\d+.\d+)
+    - GESAMT.*\s(\d.*?,\d{2})\n

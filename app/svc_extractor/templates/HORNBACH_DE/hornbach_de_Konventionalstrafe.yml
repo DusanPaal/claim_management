@@ -1,0 +1,13 @@
+issuer: HORNBACH_DE
+name: Konventionalstrafe
+category: return
+kind: debit
+template_id: 211001DE003
+
+inclusive_keywords:
+  - Hornbach
+  - Konventionalstrafe
+
+fields:
+  document_number: Konventionalstrafe.*?Nr.*?(\d+)
+  amount: Summe brutto\s+(?:- )?([\d.,]+\d{2}) EUR

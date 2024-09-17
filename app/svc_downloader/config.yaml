@@ -1,0 +1,90 @@
+dirs:
+  root: \\path\to\root\directory            # (str) path to the root directory to store document-related files
+  done: ${dirs.root}\Done                   # (str) path to the directory to store successfully processed documents
+  input: ${dirs.root}\Input                 # (str) path to the directory to store incoming customer documents
+  upload: ${dirs.root}\Upload               # (str) path to the directory to store uploaded documents
+  failed: ${dirs.root}\Failed               # (str) path to the directory to store failed documents
+  archive: ${dirs.root}\Archive             # (str) path to the directory to store archived documents
+  duplicate: ${dirs.root}\Duplicate         # (str) path to the directory to store duplicate documents
+  template_err: ${dirs.root}\TemplateError  # (str) path to the directory to store unprocessed documents due to parsing errors
+
+mails:            # parameters for managing incoming customer emails
+  connection:     # input mailbox connection parameters
+    server:       # (str) address of the server that hosts the mailbox
+    user_account: # (str) name of the user account that has access to the mailbox
+    mailbox:      # (str) name of the mailbox that stores the incoming emails
+
+  categories:                       # email categories to be applied manually to incoming emails by accountants
+    control:                        # (list) categories to control processing of emails
+      - IGNORE_ALREADY_EXISTING     # (str) category to ignore emails with already existing claims
+    documents:                      # (str or null) categories to flag the type of the documents attached to customer emails. If null, the category is determined autoamtically by the app.
+      - null                        # default category for emails with no attachments
+      - BONUS                       # category for emials with bonus-related documents
+      - DELIVERY                    # category for emails with delivery-related documents
+      - INVOICE                     # category for emails with invoice-related documents
+      - PRICE                       # category for emails with pricing-related documents
+      - PROMO                       # category for emails with promotional documents
+      - REBUILD_WITHOUT_RETURN      # category for emails with return-related documents issued as a result of rebuilds of goods
+      - QUALITY                     # category for emails with quality-related documents
+      - PENALTY                     # category for emails with penalty-related documents
+      - RETURN                      # category for emails with return-related documents
+      - FINANCE                     # category for emails with finance-related documents
+
+  subfolders:                       # subfolders to store emails based on their processing status
+    claim_creation_completed: Done  # (str) name of subfolder for emails with successfully created claims
+    claim_creation_failed: Manual   # (str) name of subfolder for emails where creatig a new disputed claim fails
+    claim_creation_ready: Temp      # (str) name of subfolder for emails with claims ready for creation
+    claim_update_failed: Manual     # (str) name of subfolder for emails where updating of an existing disputed case fails
+
+customers:                      # list of customer-specific parameters
+  CUSTOMER_DE:                  # customer -specific parameters where "CUSTOMER" is the customer name and "DE" is the country code
+    pdf_type: textual           # (str) Form of the attached PDF file: "textual" (for electonic PDFs), "scanned" (for scanned docuemnts), "unspecified" (for emails wheren both the textual or scanned PDFs may be attached)
+    extractor: regex            # Method used for data extraction from PDF: regex (Regex templating engine is used); ai (MS Forms Recognizer is used)
+    pdf_count: zero_or_one      # Expected number of attachments per message: zero_or_one (No PDF or a single PFf is expected); one (A signle PDF is expected); one_or_two (A single or two PDFs are expected)
+    attach_merged: False        # (bool) Whether the attached PDFs will be replaced with merged PDFs.  Attaching merged PDF can be done only if pdf_count = {one_or_two}
+    attachment_name: default    # (str) Name of the merged file to attach: Applicable only if pdf_count = {one_or_two} - default (A default name "document.pdf" is used (e.g. attachment "4464_45.pdf" is renamed to "document.pdf")); base (common string of attachment names (base name) is used)
+
+database:                       # parameters for connecting to the database
+  host:                         # (str) address of the database server
+  port:                         # (int) port number of the database server
+  name:                         # (str) name of the database
+  schema:                       # (str) name of the database schema containing the data table
+  table:                        # (str) name of the table to store the extracted data and the processing status
+  user:                         # (str) name of the user account to access the database
+  password:                     # (str) password of the user account to access the database
+  debug:                        # (bool) enable/disable printing of debugging messages
+
+converter:                      # parameters for converting PDF files to text
+  url:                          # (str) URL of the OCR server
+  routes:                       # params for processing of pdf files by their type
+    textual:                    # (str) route for processing textual PDF files only
+    scanned:                    # (str) route for processing scanned PDF files only
+    unspecified:                # (str) route for processing emails with both textual and scanned PDFs (the destination route is determined by the app based on the contents of the PDF)
+  secret:                       # (str) secret key to access the OCR server
+  timeout:                      # (int) time in seconds to wait for OCR server response before giving up
+  attempts:                     # (int) number of attempts to contact the OCR server if it doesn't respond
+  wait_attempts:                # (int) seconds to wait between attempts to contact the unresponsive OCR server
+  ignore_server_errors:         # (bool) If true, OCR server errors are ignored, otherwise the service is forced to terminate.
+  debugging:                    # (bool) print debugging messages
+  force:                        # (bool) enforce PDF conversion even if the converted text is already stored in the DB
+
+processing: # paraemters for additional control the processing of the documents       
+  
+  # possible states of the documents in the processing pipeline
+  document_states: 
+    document_registration_success: registered
+    document_extraction_failed: extraction_error
+    document_extraction_completed: extracted
+
+  claim_states:
+    claim_creation_completed: completed
+    claim_creation_failed: processing_error
+    claim_creation_duplicate: duplicate
+    claim_case_unmatched: case_unmatched
+
+  mail_states:
+    mail_completed_moved: done
+    mail_duplicate_moved: done
+    mail_failed_moved: manual
+    mail_extractionerror_moved: manual
+    mail_case_unmatched_moved: manual

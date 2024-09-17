@@ -1,0 +1,17 @@
+issuer: ROLLER_DE
+name: Bonusabrechnung
+category: bonus
+kind: debit
+template_id: 171001DE002
+
+inclusive_keywords:
+  - ROLLER
+  - Bonusabrechnung
+
+exclusive_keywords:
+  - GUTSCHRIFT|Gutschrift
+
+fields:
+  document_number: Beleg\s*-\s*Nr.*?\s(\d+)
+  amount: Betrag.*?(\S+,\d{2})\n
+  reason: (.*)(?=\nMit freundlichen)

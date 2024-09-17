@@ -1,0 +1,61 @@
+issuer: ROLLER_DE
+name: Retoure
+category: [return, rebuild]
+kind: debit
+template_id: 171001DE001
+
+inclusive_keywords:
+  - ROLLER
+  - Retourenschein
+
+exclusive_keywords:
+  - GUTSCHRIFT|Gutschrift
+  # - RETOURE LEDVANCE
+  # retoure zatial odkomentovane, ak bude aj nadalej brat pod tymto
+  # templatom nespravne dokumenty, bude potrebna korektura navzorkovanim
+
+fields:
+  document_number: BELASTUNGSAZNZEIGE - NR.*?(\w+)
+  return_number:
+    - Retourenschein.*?(\d+)
+    - Retourenschein\n.*\n.*?(\d+)
+  amount: (?:.*EUR\n){2}.*?(\S+)\s+EUR
+  reason: (.*)(?=\nWir bitten um)
+  items: (\d+)\s+\d+\s+(\S+)\sEUR\n.*?(\d+,00)\s?%.*?(\S+)\s+EUR\n.*?(\S+)\s+EUR
+
+optional_fields:
+  - items
+
+options:
+  replace:
+    # unwanted text removal
+    - ['MIT FREUNDLCIHEN GRÜßEN\n.*\n', ""]
+    - ["WIR BITTEN UM GUTSCHRIFT\n", ""]
+
+    # OCR glitch corrections
+    - ['(\n\d\s+)(LO\s+)(\d{8})', '\1\3']
+    - ['(\S+\s+EUR)\n(\d+\s+\d+(?:\s+\d+)?)', '\2 \1']
+    - ['(\S+\s+EUR)\n(\d{8})', '\2 \1']
+    - ['(Nummer\s)(\d)(\s:\s\d{7})', '\1\3']
+    - ['(EUR\s+)', 'EUR\n']
+    - ['(EUR)(.*\n)', '\1\n']
+    - ['(EUR)(\s\d+\n)', "EUR"]
+    - ['(:\s+\d+)\n(Retourenschein.*Nummer)', '\2 \1']
+    - ['(Retourenschein.*Nummer)\n(.*?\d+)', '\1 \2']
+    - ['(.*?NR.*?\w+)\n(BELASTUNGSAZNZEIGE)', '\2 \1']
+    - ['(BELASTUNGSAZNZEIGE)\n(.*?NR.*?\w+)', '\1 \2']
+    - ['(\S+)\s(\S+)\s(EUR)\s(EUR)', '\2 \3\n\1 \4']
+    - ['(8)(\s+00)(\s\d+\s+.*?EUR\n)', '\1\3'] # extremly rare glitch
+    - ["Bemerkung Wir bitten um", "Wir bitten um"] # extremly rare glitch
+    - ["Wir Bemerkung bitten um", "Wir bitten um"] # extremly rare glitch
+    - ['\nA\n', '\n'] # extremly rare glitch
+    - ['\nAV\n', '\n'] # extremly rare glitch
+    - ["ROL - ER", "ROLLER"] # extremly rare glitch
+    - ['\nE\n', '\n'] # extremly rare glitch
+    - ['(Retouren.*?Nummer\s)(\d)(\s\d{7})', '\1 : \2'] # extremly rare glitch
+    - ['(\d{2})( P )(EUR)', '\1 \3'] # extremly rare glitch
+    - ['(\d{2})( L )(EUR)', '\1 \3'] # extremly rare glitch
+    - ['(\+.*?EUR\n)(.*[^EUR])\n', '\2 \1'] # extremly rare glitch
+    - ['(\d\s\d{8})(\n)(\S+\sEUR)(\n)(.*)(\n)(.*?EUR)', '\1 \3\n\5 \7'] # extremly rare glitch
+    - [".*?Wir bitten um", "Wir bitten um"] # extremly rare glitch
+    - ["(EUR)(?!\n)", '\1\n'] # extremly rare glitch

@@ -1,0 +1,18 @@
+issuer: OBI_CH
+name: Belastungsanzeige aus Warenretoure
+category: return
+kind: debit
+template_id: 160074CH003
+
+inclusive_keywords:
+  - OBI
+  - Winterthur
+  - Belastungsanzeige
+  - Warenretoure
+
+fields:
+  branch: R.*Ein.*?\s*?(\d{3})
+  supplier: Lieferant\s*.*?:\s*.*?(\d{4})
+  document_number: Rechnung.*N.*?([1-9]\d+)
+  archive_number: R.*Ein.*?\s*?(\d{10})
+  amount: Gesamt.*?\n?.*?Betra.*?\n?.*?(\d+[.,]\d+)

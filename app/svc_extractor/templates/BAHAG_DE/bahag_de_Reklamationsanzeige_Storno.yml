@@ -1,0 +1,22 @@
+issuer: BAHAG_DE
+name: Storno-Reklamationsanzeige
+kind: credit
+template_id: 101001DE012
+
+inclusive_keywords:
+  - BAHAG|Bahag|Baus|BAUS|BAUHAUS
+  - Reklamationsanzeige
+  - Storno
+
+exclusive_keywords:
+  - TSCHECH|Tschech
+
+fields:
+  supplier: Lieferant.*?\s([1-9]\d{5})\D
+  document_number: Ihre Rechnungs-Nr.\s+(\d{9})
+  branch: Niederlassung\s*(\d{3})
+  amount: Gesamtbetrag\s*EUR\s*(\d+\.?\d*,\d+)
+  items: (\d{3})\s*(\d{8})\s*(.*)\s*(\d+)\s*(\d+)\s*(\w+)\s*(\d+\.?\d+,\d+)\s+(\d+\.?\d+,\d+)\s+(\d+\.?,\d+)
+
+optional_fields:
+  - items

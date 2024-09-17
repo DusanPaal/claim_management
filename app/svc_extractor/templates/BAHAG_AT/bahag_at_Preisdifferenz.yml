@@ -1,0 +1,27 @@
+issuer: BAHAG_AT
+name: Preisdifferenz
+category: price
+kind: debit
+template_id: 101072AT003
+
+inclusive_keywords:
+  - BAHAG|Bahag|Baus|BAUS|BAUHAUS
+  - Reklamationsanzeige
+  - Rechnung wurde.*?gekürzt
+
+exclusive_keywords:
+  - Ersetz
+  - Storno
+
+fields:
+  supplier:
+    - \n\s+Lieferant.*?\s([1-9]\d{5})\D
+    - Lieferant.*?\s([1-9]\d{5})\D
+  document_number: Ihre Rechnung.*?(\d{9})
+  invoice_number: Ihre Rechnung.*?(\d{9}) # same as invoice number for this kind of doc
+  branch: Niederlassung\s*(\d{3})
+  amount: Gesamtbetrag\s*EUR\s*(\d+\.?\d*,\d+)
+  items: (\d{3})\s*(\d{8})\s*(.*)\n\s*(\d+)\s*(\d+)\s*(\w+)\s*(\d+\.?\d+,\d+)\s+(\d+\.?\d+,\d+)\s+(\d+\.?,\d+)
+
+optional_fields:
+  - items

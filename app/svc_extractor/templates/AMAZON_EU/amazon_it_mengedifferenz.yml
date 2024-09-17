@@ -1,0 +1,24 @@
+issuer: AMAZON_IT
+kind: debit
+category: delivery
+name: Mengedifferenz
+template_id: 119999IT002
+
+inclusive_keywords:
+  - AMAZON|Amazon
+  - LEL98
+  - \d{9}\w*SC-?\s
+
+fields:
+  document_number: Amount.*\n.*?(\d{9}\w*)
+  invoice_number: Amount.*\n.*?(\d{9})
+  amount: Amount.*\n.*EUR\n?.*?\n?([\d,.]+\d{2})\n
+
+options:
+  replace:
+    # remove newline break from the row that contains amounts and tax data
+    - ['\s(\d+[.,]\d{2})\n([\d.,]+)', ' \1 \2']
+    - ['(\d{9}.*?\d{2}/\d{2}/\d{4})\n(.*)', '\1 \2']
+    - ['(\d{9}\w+)\n(\d{9}\w+)', '\2 \1']
+    - ['(\d{2}/\d{2}/\d{4})(\n)([^Dear]\S+)', '\1 \3']
+    - ['(\sIT)\n(EUR)', '\1 \2']

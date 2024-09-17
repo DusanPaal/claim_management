@@ -1,0 +1,15 @@
+issuer: OBI_CH
+name: Stornorechnung
+kind: credit
+template_id: 160074CH005
+
+inclusive_keywords:
+  - OBI
+  - Winterthur
+  - STORNORECHNUNG
+
+fields:
+  branch: R.*Ein.*?\s*?(\d{3})
+  supplier: Lieferant\s*.*?:\s*.*?(\d{4})
+  document_number: STORNORECHNUNG.*?\s*?([1-9]\d+)
+  amount: Gesamt.*?\n?.*?Betra.*?\n?.*?(\d+[.,]\d+)

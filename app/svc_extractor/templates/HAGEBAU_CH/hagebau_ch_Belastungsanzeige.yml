@@ -1,0 +1,30 @@
+issuer: HAGEBAU_CH
+name: Belastungsanzeige
+category: [
+    delivery,
+    price,
+    return,
+    penalty_general,
+    quality, #applied by user
+    invoice,
+    bonus, #len WKZ
+  ]
+kind: debit
+template_id: 120074CH001
+
+inclusive_keywords:
+  - "[Hh]agebau|HAGEBAU"
+  - BELASTUNGSANZEIGE
+
+fields:
+  document_number: Belegnummer\s+(\d{10})
+  invoice_number: Beleg.*?(\d{9}) vom
+  identifier: Zeichen.*?(\w+)
+  branch: Kunden.*?(\d{6})
+  reason: vorgenommen.*\n+(.*)
+  tax: Umsatzsteuer (\S+)%
+  amount: Rechnungsbetrag.*?(\S+)
+  supplier: Lieferantennr.*?(\d+)
+
+optional_fields:
+  - invoice_number

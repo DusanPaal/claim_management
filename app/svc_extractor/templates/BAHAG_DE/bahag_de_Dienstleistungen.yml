@@ -1,0 +1,25 @@
+issuer: BAHAG_DE
+name: Dienstleistungen
+category: finance
+kind: debit
+template_id: 101001DE007
+
+inclusive_keywords:
+  - BAHAG|Bahag|Baus|BAUS|BAUHAUS
+  - Belastungsanzeige
+  - Dienstleistungen
+
+exclusive_keywords:
+  - TSCHECH|Tschech
+  - Storno
+  - "[Ee]rsetzt|Erst.|ERSETZT" # do not process these docs!!!
+
+fields:
+  document_number: (?:Belegnummer\s+|Rechnungsnummer\s+|Nummer\s+)(\d{10}|\d{7})
+  supplier: Lieferant.*?\s([1-9]\d{5})\D
+  branch: Niederlassung\s+(\d{3})
+  amount: Belastungsbetrag\s*(\d*?\.?\d+,\d+)
+  tax: zuzüglich.+?(\d+,\d+)\s+?%
+
+optional_fields:
+  - tax

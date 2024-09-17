@@ -1,0 +1,33 @@
+issuer: MARKANT_DE
+name: Belastung
+category: [price, delivery, invoice, bonus, return, quality]
+kind: debit
+template_id: 141001DE011
+
+inclusive_keywords:
+  - Markant
+  - Beleg.*Nr.*?\s(\d+\D*)\n
+
+exclusive_keywords:
+  - RÜCKBELASTUNG
+  - Belastung aus RVG
+  - Belastung aus Retouren
+
+fields:
+  archive_number: Archivnummer.*?(\d+)
+  document_number: Beleg.*Nr.*?(\w+)
+  invoice_number: Urspr.Datum.*?(4\d{8})
+  supplier: Warenempfänger\s*(\d+)
+  reason: OP.*?Nummer.*((?:.*\n)+?)GTIN
+  tax: GESAMT\s*EUR(?:\s*(?:\d+\.)?\d+.\d+.?\s*){1,2}((?:\d+\.)?\d+.\d+)
+  amount: GESAMT\s*EUR(?:\s*(?:\d+\.)?\d+.\d+.?\s*){1,3}((?:\d+\.)?\d+.\d+)
+  items:
+    - ([\d.]+,\d{2})-(?:.*\n)+?\s+([\d.]+,\d{3})\s+([\d.]+,\d{4})\s+([\d.]+,\d{4})(?:.*\n).*?([\d.]+,\d{3})
+    - ([\d.]+,\d{2}).?\s.*\s*([\d.]+,\d{3})?\s*PCE\s*([\d.]+,\d{3})?\s*(?:PCE)?\s*([\d.]+,\d{4})\n.*?([\d.]+,\d{3})
+    - \d+,00\s+([\d.]+,\d{2})-?\n(?:.*)\s+([\d.]+,\d{3})\s+([\d.]+,\d{3})\s+([\d.]+,\d{4})?\s+([\d.]+,\d{4})?
+  email: ([\w.-]+@\s?\S+?)\.?$
+
+optional_fields:
+  - invoice_number
+  - items # not always in a reasonable format in docs
+  - email

@@ -1,0 +1,22 @@
+issuer: OBI_AT
+name: Gutschrift
+kind: credit
+template_id: 161072AT004
+
+inclusive_keywords:
+  - OBI
+  - Gutschrift
+  - ATU\d{8}
+
+exclusive_keywords:
+  - senden Sie uns bitte keine
+
+fields:
+  document_number: Gutschrift\n?.*?:\n?.*?([1-9]\d+)
+  branch:
+    - (?:Markt|MARKT)(?:.*?Nummer)?\s+(\d{1,4})
+    - R.*Ein.*?\n?.*?(\d{3})
+  supplier: Lieferant.*?\n?.*?(4844|1153)\n
+  amount:
+    - Ge[sş]amt.*?\n?.*?[Bb]etrag.*?\n?.*?([1-9][0-9.,\s]+\d{2})
+    - ([0-9\.,]*\d{2})\s+EUR\nGesamt

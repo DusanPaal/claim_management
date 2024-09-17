@@ -1,0 +1,15 @@
+issuer: AMAZON_ES
+kind: debit
+category: penalty_general
+name: Konventionalstrafe
+template_id: 119999ES003
+
+inclusive_keywords:
+  - AMAZON|Amazon
+  - Spain
+  - VCB
+
+fields:
+  document_number: nota.de.débito.*?(\d+VCB)
+  supplier: Número.IVA.Amazon.*?(\w{2}.*)\s
+  amount: Importe.neto(?:.*?\n?)*([0-9\,]+\.\d{2})

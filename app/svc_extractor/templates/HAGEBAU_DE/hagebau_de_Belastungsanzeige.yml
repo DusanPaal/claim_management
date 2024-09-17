@@ -1,0 +1,40 @@
+issuer: HAGEBAU_DE
+name: Belastungsanzeige
+category: [
+    delivery,
+    price,
+    return,
+    penalty_general,
+    quality, #applied by user
+    invoice,
+    bonus, #len WKZ
+  ]
+kind: debit
+template_id: 121001DE001
+
+inclusive_keywords:
+  - "[Hh]agebau|HAGEBAU"
+  - BELASTUNGSANZEIGE
+
+fields:
+  document_number:
+    - Belegnummer.*\s*(\d{10})
+    - BELASTUNGSANZEIGE.*\s*(\d{10})
+  invoice_number: Beleg.*?\s*?-.*?\s*?(\d{9})\s*vom
+  identifier: mit.*?[Zz]eichen.*?\s*(\w+)\n
+  branch: Kunde.*?Nr.*?(\d{6})
+  reason: vorgenommen.*\n+(.*)
+  tax: Umsatzsteuer.*?(\d+[,\.]\d{2})\s*%
+  amount:
+    - Rechnungsbetrag.*?(\d[0-9\.,]+\d{2})
+    - ([0-9.,]*\d{2})\n.*?Rechnungsbetrag
+    - Rechnungsbetrag\n?(\d[0-9\.,]+\d{2})
+  supplier: Lieferantennr.*?\s*?(\d+)
+
+optional_fields:
+  - invoice_number
+  - identifier
+
+options:
+  replace:
+    - ['(Rechnungsbetrag.*)( , )(\d{2})', '\1,\3']

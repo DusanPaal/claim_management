@@ -1,0 +1,25 @@
+issuer: MARKANT_DE
+name: Belastung aus Retouren
+category: [return, rebuild, quality, delivery]
+kind: debit
+template_id: 141001DE014
+
+inclusive_keywords:
+  - Markant
+  - Belastung aus Retouren
+
+exclusive_keywords:
+  - RÜCKBELASTUNG
+
+fields:
+  archive_number: Archivnummer.*?(\d+)
+  document_number: Beleg.*Nr.*?(\w+)
+  invoice_number: Urspr.Datum.*?(4\d{8})
+  supplier: Warenempfänger\s*(\d+)
+  tax: GESAMT\s*EUR(?:\s*(?:\d+\.)?\d+.\d+.?\s*){1,2}((?:\d+\.)?\d+.\d+)
+  amount: GESAMT\s*EUR(?:\s*(?:\d+\.)?\d+.\d+.?\s*){1,3}((?:\d+\.)?\d+.\d+)
+  email: ([\w.-]+@\s?\S+?)\.?$
+
+optional_fields:
+  - invoice_number
+  - email

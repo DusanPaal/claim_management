@@ -1,0 +1,14 @@
+issuer: TOOM_DE
+name: Retoure
+category: null
+kind: credit
+template_id: 181001DE003
+
+inclusive_keywords:
+  - toom
+  - Storno
+
+fields:
+  document_number: Rechnung\s+(\d+)
+  backreference_number: Storno.*?(\d+)
+  amount: Gesamtbetrag(?:.*\n){2}.*?([\d.]+,\d{2})\s+EUR

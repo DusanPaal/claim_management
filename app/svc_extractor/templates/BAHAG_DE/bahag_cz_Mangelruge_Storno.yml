@@ -1,0 +1,16 @@
+issuer: BAHAG_DE
+name: Storno-Mängelrüge
+category: null
+kind: credit
+template_id: 101001CZ005
+
+inclusive_keywords:
+  - BAHAG|Bahag|Baus|BAUS|BAUHAUS
+  - Mängelrüge
+  - Storno
+  - TSCHECHISCHE REPUBLIK|Tschech.Rep.
+
+fields:
+  document_number: Mängelrüge.*?(\d{12})
+  supplier: Lieferant.*?\s([1-9]\d{5})\D
+  amount: Gesamtbetrag\s+([\d.]+,\d+)

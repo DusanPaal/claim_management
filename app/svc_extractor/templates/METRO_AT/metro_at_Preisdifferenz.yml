@@ -1,0 +1,20 @@
+issuer: METRO_AT
+name: Preisdifferenz
+category: price
+kind: debit
+template_id: 151072AT002
+
+inclusive_keywords:
+  - METRO|Metro
+  - OESTERREICH|Oesterreich
+  - MENGEN.*PREIS.*DIFFERENZ|PREIS.*RABATT.*DIFFERENZ
+  - WE-NR.\s*BE-NR|WE-NR\s*0
+
+# v pripade preis + mängediff nastavit kategoriu podla WR-NR; ak we = 0 => 001; inak 004
+
+fields:
+  document_number: BE-NR.*?(\d+)
+  invoice_number: RE-NR.*?(\d+)
+  archive_number: ARCHIV-NR.*?(\d+)
+  branch: BETRIEBSST.*?(\d+)/
+  amount: DIFFERENZ.*(?:\d{2}.\d{2}.*?\d{4})\s*(\d+.\d{2})

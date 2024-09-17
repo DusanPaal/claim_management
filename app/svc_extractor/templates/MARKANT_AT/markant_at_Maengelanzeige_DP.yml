@@ -1,0 +1,23 @@
+issuer: MARKANT_AT
+name: Mängelanzeige
+category: delivery
+kind: debit
+template_id: 141072AT003
+
+inclusive_keywords:
+  - Markant
+  - Beleg.*?DP
+
+exclusive_keywords:
+  - RÜCKBELASTUNG
+
+fields:
+  archive_number: Archivnummer.*?(\d+)
+  document_number: Beleg.*Nr.*?(\d*DP\d*)
+  invoice_number: -Nr.*?\d{3}-(\d+)
+  supplier: Warenempfänger\s*(\d+)
+  amount: GESAMT.*?(\S+)\n
+  items: (\d+.\d{3})?\s*PCE\s*(\d+.\d{3})?\s*PCE\s*(\d+,\d{4})\s*(\d+,\d{4})\s*(.*)
+
+optional_fields:
+  - items

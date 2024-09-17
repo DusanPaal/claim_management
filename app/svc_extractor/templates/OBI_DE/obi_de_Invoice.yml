@@ -1,0 +1,22 @@
+issuer: OBI_DE
+name: Rechnung
+category: invoice
+kind: debit
+template_id: 161001DE004
+
+inclusive_keywords:
+  - OBI Services
+
+fields:
+  branch:
+    - Markt.?Nr.+?\w{2}.+?(\d+)
+    - Markt.*?(\d+)\n
+    - MARKT.*?(\d+)
+  supplier: Lieferant.+?(\d+)
+  document_number: Rg.+?Nr.+?(\d+)
+  delivery_number: Lieferschein.+?(\d{9})
+  invoice_number: Rg.+?Nr.+?(\d+)
+  amount: Brutto.*?([\d.]+,\d+)
+
+optional_fields:
+  - delivery_number

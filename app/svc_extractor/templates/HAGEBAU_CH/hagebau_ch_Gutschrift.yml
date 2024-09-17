@@ -1,0 +1,13 @@
+issuer: HAGEBAU_CH
+name: Gutschrift
+kind: credit
+template_id: 120074CH002
+
+inclusive_keywords:
+  - "[Hh]agebau|HAGEBAU"
+  - GUTSCHRIFT
+
+fields:
+  document_number: Belegnummer\D+(\d{10}) # number of the credit note
+  backreference_number: Betrifft\D+(\d{10}) # number of the original debit note
+  amount: Rechnungsbetrag\s+([0-9.,]+)

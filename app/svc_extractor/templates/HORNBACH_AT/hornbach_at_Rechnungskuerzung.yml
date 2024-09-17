@@ -1,0 +1,17 @@
+issuer: HORNBACH_AT
+name: Rechnungskuerzung
+category: [delivery, price]
+kind: debit
+template_id: 211072AT001
+
+inclusive_keywords:
+  - Hornbach
+  - Rechnungskürzung
+
+fields:
+  document_number: Rechnungskürzung.*?(\d+/\d+)
+  invoice_number: Ihre Rech.Nr.:\s+(900\d{6})
+  amount: Summe brutto:\s+(?:- )([\d.,]+\d{2})\s+EUR
+  items:
+    - (\d+)\s+(\d+)\s+(\d+)\s+(\d)+\s+(?:ST|LE)\s+(\S+)\s+(\S+)\s+(?:- )(\S+)\s+(\S+) %
+    - (\d+)?\s+(\d+)\s+(\S+)\s+(\S+)+\s+(?:ST|LE)\s+(\S+)\s+(?:- )?(\S+)\s+(?:- )?(\S+)\s+(\S+) %

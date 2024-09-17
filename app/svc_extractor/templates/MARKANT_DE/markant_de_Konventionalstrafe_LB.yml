@@ -1,0 +1,25 @@
+issuer: MARKANT_DE
+name: Konventionalstrafe
+category: penalty_general
+kind: debit
+template_id: 141001DE001
+
+inclusive_keywords:
+  - Markant
+  - Beleg.*?LB
+
+exclusive_keywords:
+  - RÜCKBELASTUNG
+
+fields:
+  archive_number: Archivnummer.*?(\d+)
+  document_number: Beleg.*Nr.*?(\w+)
+  invoice_number: Urspr.Datum.*?(4\d{8})
+  supplier: Warenempfänger\s*(\d+)
+  tax: GESAMT\s*EUR(?:\s*(?:\d+\.)?\d+.\d+.?\s*){1,2}((?:\d+\.)?\d+.\d+)
+  amount: GESAMT\s*EUR(?:\s*(?:\d+\.)?\d+.\d+.?\s*){1,3}((?:\d+\.)?\d+.\d+)
+  email: ([\w.-]+@\s?\S+?)\.?$
+
+optional_fields:
+  - invoice_number #not aways stated on docs
+  - email

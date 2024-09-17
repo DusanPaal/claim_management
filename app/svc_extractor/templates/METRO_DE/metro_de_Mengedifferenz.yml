@@ -1,0 +1,20 @@
+issuer: METRO_DE
+name: Mengendifferenz
+category: delivery
+kind: debit
+template_id: 151001DE001
+
+inclusive_keywords:
+  - Metro|METRO
+  - BELASTUNG ZUR RECHNUNG
+  - PREIS.*KONDITIONS\s?DIFFERENZ
+  - \d{7,}\s+\d{6,}\s+(1[,.]0).*?[,.]00\n # if VKE DIFF == 1 => 004
+
+fields:
+  document_number: BELASTUNGSANZEIGE.*NR.*?(\d+)
+  invoice_number: RECHNUNGS.*NR.*?0+(\d+)
+  delivery_number: LIEFERSCHE\s?IN.*NR.*?0+(\d+)
+  amount: GESAMT.*?([0-9\.]+[,\.]\d{2})(?=\s?\-?\n)
+
+optional_fields:
+  - delivery_number

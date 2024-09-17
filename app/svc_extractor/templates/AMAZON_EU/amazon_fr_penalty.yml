@@ -1,0 +1,22 @@
+issuer: AMAZON_FR
+kind: debit
+category: penalty_general
+name: Konventionalstrafe
+template_id: 119999FR003
+
+inclusive_keywords:
+  - AMAZON|Amazon
+  - France
+  - VCB
+
+fields:
+  document_number: Numéro\sNote\sDe\sDébit:\s+(\S+)
+  supplier: TVA\sAmazon:\s+(\S+)
+  amount:
+    # Normally, the total amount is called"Montant Total",
+    # but some debit notes have an error, where the Italian
+    # name "Importo Totale lordo" is used instead of the expected
+    # French naming.
+    - Montant.Total(?:.*?\n?)*([0-9\,]+\.\d{2}) # French
+    - Importo.Totale.lordo(?:.*?\n?)*([0-9\,]+\.\d{2}) # Italian
+    - Importo(?:.*?\n)+?.*?\s+([\d.,-]+\d{2})

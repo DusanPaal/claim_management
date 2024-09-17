@@ -1,0 +1,24 @@
+issuer: MARKANT_DE
+name: Rechnung
+category: invoice
+kind: debit
+template_id: 141001DE005
+
+inclusive_keywords:
+  - Markant
+  - Beleg.*?ST
+
+exclusive_keywords:
+  - RÜCKBELASTUNG
+
+fields:
+  archive_number: Archivnummer.*?(\d+)
+  document_number: Beleg.*Nr.*?(\w+)
+  invoice_number: Urspr.Datum.*?(4\d{8})
+  supplier: Warenempfänger\s*(\d+)
+  tax: DE\s(?:\s*(?:\d+\.)?\d+.\d+.?\s*){1,3}((?:\d+\.)?\d+.\d+)
+  amount: GESAMT\s*EUR(?:\s*(?:\d+\.)?\d+.\d+.?\s*){1,3}((?:\d+\.)?\d+.\d+)
+  email: ([\w.-]+@\s?\S+?)\.?$
+
+optional_fields:
+  - email

@@ -1,0 +1,48 @@
+version: 1
+disable_existing_loggers: True
+
+formatters:
+  report:
+    format: "[%(asctime)s]---%(levelname)s---||%(module)s.%(funcName)s.ln:%(lineno)s||%(message)s"
+    datefmt: "%H:%M:%S"
+  simple:
+    format: "%(asctime)s %(name)s: %(message)s"
+  extended:
+    format: "[%(asctime)s]---%(levelname)s---||%(message)s"
+    datefmt: "%H:%M:%S"
+
+handlers:
+  console:
+    class: logging.StreamHandler
+    formatter: report
+  main_filehandler:
+    delay: True
+    class: logging.FileHandler
+    formatter: extended
+    filename: log.log
+    encoding: "utf-8"
+  master_filehandler:
+    delay: True
+    class: logging.handlers.RotatingFileHandler
+    formatter: extended
+    filename: master.log
+    maxBytes: 1048576
+    backupCount: 5
+    encoding: "utf-8"
+loggers:
+  document:
+    level: 20 # 20 = info, 10 = debug
+    handlers: [console, master_filehandler]
+    propogate: yes
+  global:
+    level: 10
+    handlers: [console, main_filehandler]
+    propogate: yes
+  service:
+    level: 20
+    handlers: [console, main_filehandler]
+    propogate: yes
+  manager:
+    level: 20
+    handlers: [console, main_filehandler]
+    propogate: yes

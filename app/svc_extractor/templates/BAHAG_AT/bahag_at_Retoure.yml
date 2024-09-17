@@ -1,0 +1,30 @@
+issuer: BAHAG_AT
+name: Belastungsanzeige aus Retoure
+category: [return, quality, rebuild]
+kind: debit
+template_id: 101072AT004
+
+inclusive_keywords:
+  - BAHAG|Bahag|Baus|BAUS|BAUHAUS
+  - Belastungsanzeige
+  - Retoure
+
+exclusive_keywords:
+  - Ersetz
+
+fields:
+  document_number: Belastungsanzeige aus Retoure\n(?:.*\n)*?(\d{12})
+  branch: Niederlassung\s+(\d+)
+  amount: Gesamtbetrag\s+EUR\s+(\d*\.?\d+,\d+)
+  supplier: 
+    - \n\s+Lieferant.*?\s([1-9]\d{5})\D
+    - Lieferant.*?\s([1-9]\d{5})\D
+  reason:
+    - Bemerkung\s*:\s*(.*)\s*Retourengrund\s*:\s*(.*)
+    - Bemerkung\s*(.*)\s*Retourengrund\s*(.*)
+
+options:
+  replace:
+    # Bemerkung and Retourengrund correction
+    - ['I\n', '']
+    - [' ■ ', '']

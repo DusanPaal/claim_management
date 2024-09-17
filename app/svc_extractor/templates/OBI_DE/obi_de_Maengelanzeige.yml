@@ -1,0 +1,27 @@
+issuer: OBI_DE
+name: Mängelanzeige
+category: [delivery, price]
+kind: debit
+template_id: 161001DE005
+
+inclusive_keywords:
+  - OBI
+  - Maengelanzeige
+
+exclusive_keywords:
+  - Maengelanzeigenstorno
+
+fields:
+  branch:
+    - R.*Ein.*?\s([0-5]\d{2})
+    - ([0-5]\d{2})\s+OBI
+  supplier: Lieferant.+(\d{4})
+  document_number:
+    - RG.+?[Nn][Rr].+?(\d+)
+    - Rechnung.+?(\w+\d+)
+  invoice_number: Ih.*RG.*?N.*?(\d+)
+  delivery_number: Lief.LS.*?(31\d{7})
+  amount:
+    - Gesamt.*\n?.*?(\d+[.,]\d+)
+    - Gesamt.*\n?.*?EUR\n?.*?(\d+[.,]\d+)
+  items: \s+\d+\s+([\d,]+)\s+([\d,]+).*?([\d,]+)\n\s+\w+\s+([\d,]+)\s+([\d,]+).*?([\d,]+)\n

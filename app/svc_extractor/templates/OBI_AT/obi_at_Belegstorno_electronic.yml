@@ -1,0 +1,24 @@
+issuer: OBI_AT
+name: Belegstorno
+kind: credit
+template_id: 161072AT012
+
+inclusive_keywords:
+  - OBI
+  - BELEGSTORNO
+  - ATU\d{8}
+
+fields:
+  document_number: 
+    - BELEGSTORNO.*?(\S+)\n
+    - Rechnung.*?(900\d{6})\n
+  branch: 
+    - Markt.*?Nummer\s(\d{1,4})
+    - Markt\s(\d{1,4})
+  supplier: Lieferant.*?(4844|1153)
+  amount: 
+    - Gesamt Betrag\n(\S+) EUR
+    - Gesamt Betrag.*?(\S+) EUR
+  backreference_number: 
+    - Ihre RG.Nr.*?(900\d+)
+    - zu (PE\d+)

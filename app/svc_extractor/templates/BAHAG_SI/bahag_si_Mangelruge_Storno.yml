@@ -1,0 +1,17 @@
+issuer: BAHAG_SI
+name: Storno-Mängelrüge
+kind: credit
+template_id: 101072SI001
+
+inclusive_keywords:
+  - Mängelrüge
+  - Storno
+  - Slowenien
+
+fields:
+  document_number: Mängelrügennummer[\s\n]*(\d{12})
+  purchase_order_number: Bestellung\s*(\d+)
+  delivery_number: Lieferscheinnummer\s+(\d{9})
+  branch: Niederlassung\s+(\d+)
+  supplier: Lieferant/Spediteur\s+(\d+)
+  amount: Gesamtbetrag\s+(\d*\.?\d+,\d+)

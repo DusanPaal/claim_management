@@ -1,0 +1,24 @@
+issuer: OBI_DE
+name: Beleg aus LQ-Vereinbarung
+category: [penalty_general, penalty_quote, penalty_delay]
+kind: debit
+template_id: 161001DE001
+
+inclusive_keywords:
+  - OBI
+  - LQ-Vereinbarung
+
+fields:
+  branch:
+    - R.*Ein.*?\s([0-5]\d{2})
+    - ([0-5]\d{2})\s+OBI
+  supplier: Lieferant.*?(\d{4})
+  amount: Gesamt.+?[.+\n]?(\d+.?\d+)
+  document_number: Nr.*?(PE\d+)
+  purchase_order_number: Bestellung\s(\d+)
+  tax: belasten wir Sie.*?mit\s+([\d,]+)%
+  items: 'LQ-Vereinbarung\s+(\d+[.,]\d{2}).*\n.*Bestellung\s(\d+)(?:.*\n){,5}.*?(\d+[.,]\d{2})(?=\.\n)'
+
+options:
+  replace:
+    - ['\s+Uebertrag(.*?\n)*?\-{2,}', ""]

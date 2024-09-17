@@ -1,0 +1,27 @@
+issuer: BAHAG_AT
+name: Mängelrüge
+category: delivery
+kind: debit
+template_id: 101072AT001
+
+inclusive_keywords:
+  - BAHAG|Bahag|Baus|BAUS|BAUHAUS
+  - Belastungsanzeige (Schaden|Mängelrüge|Fehlmenge)
+
+exclusive_keywords:
+  - Storno
+  - Ersetz
+
+fields:
+  document_number: Mängelrügennummer\s+\n?(\d+)\s+Datum
+  delivery_number: Lieferscheinnummer\s+(\d{9})
+  branch: Niederlassung\s+(\d+)
+  supplier: 
+    - \n\s+Lieferant.*?\s([1-9]\d{5})\D
+    - Lieferant.*?\s([1-9]\d{5})\D
+  amount: Gesamtbetrag\s+(\d*\.?\d+,\d+)
+  items: \d{6}\s+(\d{8})\s+(\d+)
+
+optional_fields:
+  - items
+  - delivery_number

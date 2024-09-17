@@ -1,0 +1,15 @@
+issuer: TOOM_DE
+name: Retoure
+category: return
+kind: debit
+template_id: 181001DE001
+
+inclusive_keywords:
+  - toom
+  - RETOURE
+
+fields:
+  document_number: Rechnung\s+(\d+)
+  agreement_number: Auftrag.*?(\d+)
+  amount: Gesamtbetrag(?:.*\n){2}.*?([\d.]+,\d{2})\s+EUR
+  tax: VALUTA-BELEG\s+\S+\s+(\d+,\d+)

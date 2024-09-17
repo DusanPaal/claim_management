@@ -1,0 +1,19 @@
+issuer: MARKANT_AT
+name: Rückbelastung
+kind: credit
+template_id: 141072AT006
+
+inclusive_keywords:
+  - RÜCKBELASTUNG
+  - Markant
+
+fields:
+  archive_number: Archivnummer.*?(\d+)
+  document_number: Beleg - Nr.*?(\w+)
+  backreference_number: Urspr.Datum.*?Nr.*?:\s*(\S+)\n
+  supplier: Warenempfänger\s*(\d+)
+  amount: GESAMT.*?(\S+)\n
+  email: ([\w.-]+@\s?\S+?)\.?$
+
+optional_fields:
+  - email

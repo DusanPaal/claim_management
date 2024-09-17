@@ -1,0 +1,17 @@
+issuer: HORNBACH_DE
+name: Rechnungskuerzung
+category: [delivery, price]
+kind: debit
+template_id: 211001DE001
+
+inclusive_keywords:
+  - Hornbach
+  - Rechnungskürzung
+
+fields:
+  document_number: Rechnungskürzung.*?(\d+/\d+)
+  invoice_number: Ihre Rech.Nr.:\s+(41\d{7})
+  amount: Summe brutto:\s+(?:- )([\d.,]+\d{2})\s+EUR
+  items:
+    - (\d+)\s+(\d+)\s+(\d+)\s+(\d)+\s+(?:ST|LE)\s+(\S+)\s+(\S+)\s+(?:- )(\S+)\s+(\S+) %
+    - (\d+)?\s+(\d+)\s+(\S+)\s+(\S+)+\s+(?:ST|LE)\s+(\S+)\s+(?:- )?(\S+)\s+(?:- )?(\S+)\s+(\S+) %

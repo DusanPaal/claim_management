@@ -1,0 +1,82 @@
+dirs:
+  root: \\path\to\root\directory            # (str) path to the root directory to store document-related files
+  done: ${dirs.root}\Done                   # (str) path to the directory to store successfully processed documents
+  input: ${dirs.root}\Input                 # (str) path to the directory to store incoming customer documents
+  upload: ${dirs.root}\Upload               # (str) path to the directory to store uploaded documents
+  failed: ${dirs.root}\Failed               # (str) path to the directory to store failed documents
+  archive: ${dirs.root}\Archive             # (str) path to the directory to store archived documents
+  duplicate: ${dirs.root}\Duplicate         # (str) path to the directory to store duplicate documents
+  template_err: ${dirs.root}\TemplateError  # (str) path to the directory to store unprocessed documents due to parsing errors
+
+mails:            # parameters for managing incoming customer emails
+  connection:     # input mailbox connection parameters
+    server:       # (str) address of the server that hosts the mailbox
+    user_account: # (str) name of the user account that has access to the mailbox
+    mailbox:      # (str) name of the mailbox that stores the incoming emails
+
+  categories:                       # email categories to be applied manually to incoming emails by accountants
+    control:                        # (list) categories to control processing of emails
+      - IGNORE_ALREADY_EXISTING     # (str) category to ignore emails with already existing claims
+    documents:                      # (str or null) categories to flag the type of the documents attached to customer emails. If null, the category is determined autoamtically by the app.
+      - null                        # default category for emails with no attachments
+      - BONUS                       # category for emials with bonus-related documents
+      - DELIVERY                    # category for emails with delivery-related documents
+      - INVOICE                     # category for emails with invoice-related documents
+      - PRICE                       # category for emails with pricing-related documents
+      - PROMO                       # category for emails with promotional documents
+      - REBUILD_WITHOUT_RETURN      # category for emails with return-related documents issued as a result of rebuilds of goods
+      - QUALITY                     # category for emails with quality-related documents
+      - PENALTY                     # category for emails with penalty-related documents
+      - RETURN                      # category for emails with return-related documents
+      - FINANCE                     # category for emails with finance-related documents
+
+  subfolders:                       # subfolders to store emails based on their processing status
+    claim_creation_completed: Done  # (str) name of subfolder for emails with successfully created claims
+    claim_creation_failed: Manual   # (str) name of subfolder for emails where creatig a new disputed claim fails
+    claim_creation_ready: Temp      # (str) name of subfolder for emails with claims ready for creation
+    claim_update_failed: Manual     # (str) name of subfolder for emails where updating of an existing disputed case fails
+
+database:                       # parameters for connecting to the database
+  host:                         # (str) address of the database server
+  port:                         # (int) port number of the database server
+  name:                         # (str) name of the database
+  schema:                       # (str) name of the database schema containing the data table
+  table:                        # (str) name of the table to store the extracted data and the processing status
+  user:                         # (str) name of the user account to access the database
+  password:                     # (str) password of the user account to access the database
+  debug:                        # (bool) enable/disable printing of debugging messages
+
+processing:                     # paraemters for additional control the processing of the documents
+  credit_retention_time: 30     # Retention time (in days) for credit notes in the upload folder before archiving. Negative values are capped at 0.
+
+  notifications:                # rules for handling duplicated service notifications in QM
+    duplicates:                 # (str) "first": First notification is considered; "last": Last notification is considered; "error": An error is raised.
+
+  document_states:              # possible states of the documents in the processing pipeline
+    document_registration_success: registered
+    document_extraction_failed: extraction_error
+    document_extraction_completed: extracted
+
+  claim_states:
+    claim_creation_completed: completed
+    claim_creation_failed: processing_error
+    claim_creation_duplicate: duplicate
+    claim_case_unmatched: case_unmatched
+
+  mail_states:
+    mail_completed_moved: done
+    mail_duplicate_moved: done
+    mail_failed_moved: manual
+    mail_extractionerror_moved: manual
+    mail_case_unmatched_moved: manual
+
+sap:                # parameters for connecting to the RFC API of the SAP system
+  connections:    
+    P25:            # name of the system to connect to
+      user:         # (str) name of the user account to access the SAP system
+      passwd:       # (str) password of the user account to access the SAP system
+      ashost:       # (str) address of the SAP system
+      sysnr:        # (str) system number of the SAP system
+      client:       # (str) client number of the SAP system
+
+  active_system: P25 # (str) name of the active SAP system

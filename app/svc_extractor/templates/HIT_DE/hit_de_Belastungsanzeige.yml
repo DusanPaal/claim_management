@@ -1,0 +1,15 @@
+issuer: HIT_DE
+name: Belastung
+category: [delivery, price, quality]
+kind: debit
+template_id: 131001DE001
+
+inclusive_keywords:
+  - HIT
+
+fields:
+  document_number: Reklamationsnummer\s*.*(?:\d{2}.\d{2}.\d{4}).*?(\d+)
+  invoice_number: Rechnungsnummer.*/.*Datum\s*.*?(?:\d{11,13})\s*(\d+)
+  delivery_number: Nummer.*Lieferschein(?:.*\s*)*?(\d+)
+  reason: \n\d{3}\s(.*)
+  amount: Endbetrag.*EUR.*?(\d+[,.]\d{2})

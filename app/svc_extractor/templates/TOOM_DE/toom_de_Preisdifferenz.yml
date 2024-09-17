@@ -1,0 +1,24 @@
+issuer: TOOM_DE
+name: Rechnung
+category: delivery
+kind: debit
+template_id: 181001DE004
+
+inclusive_keywords:
+  - toom
+  - "Abw. Preise v. Vereinb"
+
+fields:
+  document_number: Rechnung(?:skorrektur)?\s+(\d+)
+  invoice_number: Rechnungsnummer\s(\d{9})\s
+  delivery_number: Lieferscheinnummer\s(\d{9})
+  agreement_number: Auftrag.*?(\d+)
+  amount: Gesamtbetrag(?:.*\n){2}.*?([\d.]+,\d{2})\s+EUR
+  tax:
+    - RECHNUNGSDIFFERENZ\s+\S+\s+(\d+,\d+)
+    - VALUTA-BELEG\s+\S+\s+(\d+,\d+)
+  items: Abw. Preise v. Vereinb.\n.*?\d{7}\s{2,}(\S+)\s{2,}(\S+)\s{2,}(\S+)\s(\S+)\s+\d{2}\n
+  
+optional_fields:
+  - agreement_number
+  - delivery_number

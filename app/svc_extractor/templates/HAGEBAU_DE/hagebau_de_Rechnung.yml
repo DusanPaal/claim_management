@@ -1,0 +1,15 @@
+issuer: HAGEBAU_DE
+name: Rechnung
+category: penalty_general
+kind: debit
+template_id: 121001DE003
+
+inclusive_keywords:
+  - "[Hh]agebau|HAGEBAU"
+  - RECHNUNG
+
+fields:
+  document_number: Rechnungsnummer\s(\d+)
+  branch: Kundennummer.*?(\d{6})
+  tax: Umsatzsteuer.*?(\d+[,\.]\d{2})\s
+  amount: Rechnungsbetrag.*?(\d[0-9\.,]+\d{2})

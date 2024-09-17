@@ -1,0 +1,17 @@
+issuer: OBI_CH
+name: Rechnung
+category: invoice
+kind: debit
+template_id: 160074CH004
+
+inclusive_keywords:
+  - OBI
+  - Winterthur
+  - OBI.*Services
+
+fields:
+  document_number: Rg.Nr.*?(\d+)
+  invoice_number: Rg.Nr.*?(\d+)
+  delivery_number: Lieferschein.*?(\d{9})
+  purchase_order_number: Bestellung.*?(\d+)
+  amount: Brutto.*?(\d+[.,]\d+)

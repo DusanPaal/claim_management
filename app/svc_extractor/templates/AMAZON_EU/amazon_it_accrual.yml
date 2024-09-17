@@ -1,0 +1,21 @@
+issuer: AMAZON_IT
+kind: debit
+category: [bonus, promo]
+name: Accrual
+template_id: 119999IT001
+
+inclusive_keywords:
+  - AMAZON|Amazon
+  - Italia
+  - IVA.*?IT
+  - MDF
+
+fields:
+  document_number: (?:Numero.*?Nota.*?di.*?|Fattura.*?)(\d+)
+  supplier: Accounts Payable\s+Partita.IVA.*?(IT.*?)\s
+  tax: Prezzo.unitario\s*Totale.Linea\s*IVA\n.*?(\d+\.00)%
+  amount: Totale.Fattura\s*.?(?:\d.*?\.\d{2}\s*){3}(\d.*?\.\d{2})
+
+optional_fields:
+  - supplier
+  - tax

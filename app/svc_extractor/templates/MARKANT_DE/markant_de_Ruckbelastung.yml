@@ -1,0 +1,19 @@
+issuer: MARKANT_DE
+name: Rückbelastung
+kind: credit
+template_id: 141001DE010
+
+inclusive_keywords:
+  - RÜCKBELASTUNG
+  - Markant
+
+fields:
+  archive_number: Archivnummer.*?(\d+)
+  document_number: Beleg-Nr.*?(\w+)
+  backreference_number: Urspr.Datum.*?(\w+)\n
+  supplier: Warenempfänger\s*(\d+)
+  amount: GESAMT\s*EUR(?:\s*(?:\d+\.)?\d+.\d+.?\s*){1,3}((?:\d+\.)?\d+.\d+)
+  email: ([\w.-]+@\s?\S+?)\.?$
+
+optional_fields:
+  - email

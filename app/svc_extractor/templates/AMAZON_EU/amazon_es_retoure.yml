@@ -1,0 +1,14 @@
+issuer: AMAZON_ES
+kind: debit
+category: return
+name: Retoure
+template_id: 119999ES006
+
+inclusive_keywords:
+  - AMAZON|Amazon
+  - LELO5
+  - Return
+
+fields:
+  document_number: Debit Note Number:\s+(\d{10})
+  amount: Invoice.Total\s*.?(?:\d.*?\.\d{2}\s*){3}(\d.*?\.\d{2})

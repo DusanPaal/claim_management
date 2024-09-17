@@ -1,0 +1,24 @@
+issuer: BAHAG_DE
+name: CDC-Abschlag
+category: bonus
+kind: debit
+template_id: 101001DE006
+
+inclusive_keywords:
+  - BAHAG|Bahag|Baus|BAUS|BAUHAUS
+  - Belastungsanzeige
+  - CDC-Abschlag
+
+exclusive_keywords:
+  - TSCHECH|Tschech
+  - Storno
+  - "[Ee]rsetzt|Erst.|ERSETZT" # do not process these docs!!!
+
+fields:
+  document_number: (?:Belegnummer\s+|Rechnungsnummer\s+)(\d{10}|\d{7})
+  amount: Gesamtbetrag\s*(\d+\.?\d*,\d+)
+  supplier: Lieferant.*?\s([1-9]\d{5})\D
+  tax: zuzüglich.+?(\d+,\d+)\s+?%
+
+optional_fields:
+  - tax

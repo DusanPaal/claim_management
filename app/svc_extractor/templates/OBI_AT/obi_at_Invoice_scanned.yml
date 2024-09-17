@@ -1,0 +1,16 @@
+issuer: OBI_AT
+name: Rechnung
+category: invoice
+kind: debit
+template_id: 161072AT010
+
+inclusive_keywords:
+  - OBI Services
+
+fields:
+  branch: Markt\s+Nr.*?(?:AT)\s+(\d+)
+  supplier: Lieferant.*?\n?.*?(4844|1153)\n
+  document_number: Betrifft.*?(900\d{6})\D
+  invoice_number: Betrifft.*?(900\d{6})\D
+  delivery_number: Lieferschein.*?(31\d{7})
+  amount: Brutto.*?([1-9][0-9.,\s]+\d{2})

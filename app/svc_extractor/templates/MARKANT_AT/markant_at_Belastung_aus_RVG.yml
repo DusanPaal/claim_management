@@ -1,0 +1,29 @@
+issuer: MARKANT_AT
+name: Belastung aus RVG
+category: [bonus, finance, penalty_general, invoice]
+kind: debit
+template_id: 141072AT007
+
+inclusive_keywords:
+  - Markant
+  - Belastung aus RVG
+
+exclusive_keywords:
+  - Beleg.*?ST
+
+fields:
+  archive_number: Archivnummer.*?(\d+)
+  document_number: Beleg.*Nr.*?(\w+)
+  supplier: Warenempfänger\s*(\d+)
+  invoice_number: Urspr.Datum.*?(900\d{6})
+  reason:
+    - Verkaufsbelege
+    - OTIF-P\?nale
+    - OP.*?Nummer.*((?:.*\n)+?)GTIN
+  tax: GESAMT\s*EUR(?:\s*(?:\d+\.)?\d+.\d+.?\s*){1,2}((?:\d+\.)?\d+.\d+)
+  amount: GESAMT.*?(\S+\d{2})\n
+  email: ([\w.-]+@\s?\S+?)\.?$
+
+optional_fields:
+  - email
+  - invoice_number

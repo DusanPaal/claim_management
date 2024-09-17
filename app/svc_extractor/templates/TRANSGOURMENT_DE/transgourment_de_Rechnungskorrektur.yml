@@ -1,0 +1,28 @@
+issuer: TRANSGOURMENT_DE
+name: Rechnungskorrektur
+category: delivery
+kind: debit
+template_id: 191001DE001
+
+inclusive_keywords:
+  - Transgourmet
+  - Mengendiff|Mindermenge
+
+fields:
+  document_number: Rechnungskorrektur\s+(\d+)
+  invoice_number: Urspr-Beleg-Nr.*?(41\d{7})
+  agreement_number: Auftrag.*?(\d+)
+  amount: Gesamtbetrag(?:.*\n){2}.*?([\d.]+,\d{2})\s+EUR
+  tax: RECHNUNGSDIFFERENZ\s+\S+\s+(\d+,\d+)
+  supplier: Warenempf.*?(\d.*?)\n
+
+optional_fields:
+  - agreement_number
+  - invoice_number
+
+options:
+  replace:
+    # THe invoice number is printed without the leading '41' digits the PDF,
+    # and needs to be corrected in the original text before data extraction
+    - ['(Urspr-Beleg-Nr.*?)(\d+)', '\g<1>41\g<2>']
+    - ['(Warenempf.*?)(\d+)\s(\d+)\s(\d+)\s(\d)\n', '\1\2\3\4\5']

@@ -1,0 +1,38 @@
+issuer: HAGEBAU_AT
+name: Belastungsanzeige
+category: [
+    delivery,
+    price,
+    finance,
+    return,
+    penalty_general,
+    quality,
+    invoice,
+    bonus,
+  ] # quality applied manually by user
+kind: debit
+template_id: 121072AT001
+
+inclusive_keywords:
+  - "[Hh]agebau|HAGEBAU"
+  - BELASTUNGSANZEIGE
+
+fields:
+  document_number: BELASTUNGSANZEIGE\s*.*\s*Belegnummer.*\s*(\d{10})
+  invoice_number: zu Ihrem Beleg.*?\s*?-.*?\s*?(\d{8,})
+  identifier: mit.*?\s*[Zz]eichen.*?\s*(\w*\d{8,})
+  branch: Kunden.*?\s*?Nr.*?\s*?(\d{6})
+  reason: vorgenommen.*\n+(.*)
+  amount: Rechnungsbetrag.*?\s*?(\d+.*)
+  supplier: Lieferantennr.*?\s*?(\d+)
+  zip: (\d{4}).?[A-Z].*\s*\n*\w+betrag # pokial c. marktu chyba, tak sa c. zakaznika dohlada pom. psc
+
+optional_fields:
+  - invoice_number
+  - identifier
+
+options:
+  replace:
+    # remove glitches and misplaced text
+    - ['(Nettobetrag.*)\n(\d{4}\s?\w+)', '\2\n\1']
+    - ['(Rechnungsbetrag.*)( , )(\d{2})', '\1,\3']

@@ -1,0 +1,21 @@
+issuer: BAHAG_SI
+name: Retoure
+category: return
+kind: debit
+template_id: 101072SI005
+
+inclusive_keywords:
+  - Belastungsanzeige
+  - Retoure
+  - Slowenien
+
+exclusive_keywords:
+  - Storno
+  - "[Ee]rsetzt|Erst.|ERSETZT" # do not process these docs!!!
+
+fields:
+  document_number: aus Retoure[\n\s]*.*?(\d{12})
+  branch: Niederlassung\s+(\d+)
+  amount: Gesamtbetrag\s+EUR\s+(\d*\.?\d+,\d+)
+  supplier: Lieferant\s+(\d+)
+  reason: Bemerkung\s*:\s*(.*)\s*Retourengrund\s*:\s*(.*)

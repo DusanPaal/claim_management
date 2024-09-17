@@ -1,0 +1,18 @@
+issuer: AMAZON_DE
+kind: debit
+category: penalty_general
+name: Konventionalstrafe
+template_id: 119999DE004
+
+inclusive_keywords:
+  - AMAZON|Amazon
+  - Germany
+  - VCB
+
+fields:
+  document_number: '[Dd]ebit.[Nn]ote.[Nn]um.*?(\d+VCB)'
+  supplier: Amazon.VAT.Number.*?(\w{2}.*)\s
+  amount:
+    - Amount.*\n.*EUR\n?.*?\n?([\d,.]+\d{2})\n
+    - Total Amount\n.*?([\d.,]+)
+    - Total Amount(?:\n.*)+?\s+-([\d.,]+)

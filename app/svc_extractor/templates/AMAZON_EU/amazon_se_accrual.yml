@@ -1,0 +1,26 @@
+issuer: AMAZON_SE
+kind: debit
+category: [bonus, promo]
+name: Accrual
+template_id: 119999SE002
+
+inclusive_keywords:
+  - AMAZON|Amazon
+  - Germany|Luxembourg
+  - VAT Number.*?SE
+  - MDF
+
+fields:
+  document_number: '[Dd]ocument.*?[Nn]um.*?(\d+)'
+  supplier: 'VAT.Number.*?(\w{2}.*)\s*[Dd]ocument.*?[Nn]um'
+  tax: Unit.Price\s*Line.Total\s*VAT\s*.*?(\d+.\d{2})%
+  amount: Invoice.Total\s*.?(?:\d.*?\.\d{2}\s*){2,3}(\d.*?\.\d{2})
+
+optional_fields:
+  - supplier
+  - tax
+
+options:
+  replace:
+    # remove newlines breaks with COPY insert
+    - ['\n+\s+COPY', ""]

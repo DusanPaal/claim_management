@@ -1,0 +1,15 @@
+issuer: BAHAG_AT
+name: Storno-Reklamationsanzeige
+kind: credit
+template_id: 101072AT009
+
+inclusive_keywords:
+  - BAHAG|Bahag|Baus|BAUS|BAUHAUS
+  - Reklamationsanzeige
+  - Storno
+
+fields:
+  document_number: Nummer\s+(\d+)
+  invoice_number: Ihre Rechnung.*?(\d{9})
+  branch: Niederlassung\s+(\d+)
+  amount: Gesamtbetrag\s+EUR\s+(\d*\.?\d+,\d+)

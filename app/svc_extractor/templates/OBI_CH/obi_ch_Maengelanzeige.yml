@@ -1,0 +1,23 @@
+issuer: OBI_CH
+name: Mängelanzeige
+category: [delivery, price]
+kind: debit
+template_id: 160074CH002
+
+inclusive_keywords:
+  - OBI
+  - Winterthur
+  - BELASTUNGSANZEIGE
+
+fields:
+  branch: R.*[E,Ē]in.*?\s*?(\d{3})
+  supplier: Lieferant.*?(\d{4})
+  document_number: BELASTUNGSANZEI.*\n?.*?(\d{10})
+  invoice_number: Ih.*RG.*?N.*?(\d+)
+  delivery_number: Lief.*?LS.*?(\d{9})
+  amount: Gesamt.*?\n?.*?Betra.*?\n?.*?(\d+[.,]\d+)
+  items: (\d{6,13}).*?\s*\n*?(BA-Wert)*.*?\s*\n*?(\d+.?[,\.].?\d{3}).*?\s*\n*?(\d+.*?\s*?[,\.].*?\s*?\d{4}).*?\s*\n*?(\d+.*?\s*?[,\.].*?\s*?\d{2}).*?\s*\n*?(\d+.*?\s*?[,\.].*?\s*?\d{2}).*?\s*\n*?(\d+.*?\s*?[,\.].*?\s*?\d{2})\s*?\n?([A-Z0-9]{2}.*?\d+[A-Z0-9]{2})*.*?\s*\n*?(\d+.*?\s*?[,\.].*?\s*?\d{2,3})*.*?\s*\n*?(\d+.*?\s*?[,\.].*?\s*?\d{4})*.*?\s*\n*?(\d+.*?\s*?[,.\.].*?\s*?\d{2})*.*?\s*\n*?(\d+.*?\s*?[,\.].*?\s*?\d{2})*.*?\s*\n*?(\d+.*?\s*?[,\.].*?\s*?\d{2})*\s*?\n?(4\d+)*.*?\s*?(.+)*.*?\s*\n*?(\d+.*?[,.].*?\d{2})*.*?\s*\n*?(\d+.*?[,.].*?\d{2})*\s*?\n?(Lief.+?\d+[,\.]\d{2})*.*?\s*?(Int.+?\d+)*.*?\s*?(BSTN.+?\d+)*.*?\s*?([VvOoMm].+?\d{2}.+\d{2}.+\d{4})*
+
+optional_fields:
+  - items
+  - delivery_number

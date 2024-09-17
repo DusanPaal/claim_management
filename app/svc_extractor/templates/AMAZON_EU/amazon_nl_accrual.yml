@@ -1,0 +1,15 @@
+issuer: AMAZON_NL
+kind: debit
+category: [bonus, promo]
+name: Accrual
+template_id: 119999NL001
+
+inclusive_keywords:
+  - AMAZON|Amazon
+  - Nederland
+  - VAT Number.*?NL
+
+fields:
+  document_number: Document Number.*?(\d+)
+  supplier: VAT Number.*?(NL.*)
+  amount: (\S+)\s+(?=Currency)

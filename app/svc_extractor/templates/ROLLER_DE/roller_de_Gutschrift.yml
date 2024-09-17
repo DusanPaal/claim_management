@@ -1,0 +1,13 @@
+issuer: ROLLER_DE
+name: Retoure
+kind: credit
+template_id: 171001DE007
+
+inclusive_keywords:
+  - ROLLER
+  - GUTSCHRIFT|Gutschrift
+
+fields:
+  document_number: GUTSCHRIFTSANZEIGE - NR.*?(\w+)
+  backreference_number: Rechnungsnummer.*?(\d+)
+  amount: RECHNUNGSMENGE(?:.*\n)+?(\S+)\s+EUR

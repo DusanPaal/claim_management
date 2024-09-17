@@ -1,0 +1,40 @@
+DE:
+
+    fields:
+        Niederlassung: branch
+        Dokumentname: document_name
+        Lieferant: supplier
+        Gesamtbetrag: amount
+        Dokumentnummer: document_number
+        Artikel: items
+        Kundenname: customer_name
+        Lieferschein: delivery_number
+        Bestellnummer: purchase_order_number
+        Steuernummer: tax_code
+        Liefernummer: delivery_number
+        Rechnungsnummer: invoice_number
+
+    items:
+        Bestellnummer: purchase_order_number
+        OBIAR: item_code_customer
+        LAR: item_code_ledvance
+        Artikelbezeichnung: item_name
+        Menge: pieces_count
+        EK-Preis: amount_per_piece
+        PosWert: item_amount
+        RechMg OBI: item_code_pieces_customer
+        RechMg Lf: item_code_pieces_ledvance
+        RechEK OBI: item_code_amount_customer
+        RechEK Lf: item_code_amount_ledvance
+        PosRab OBI: item_discount_rate_customer
+        PosRab Lf: item_discount_rate_ledvance
+        KopfRab OBI: header_discount_rate_customer
+        KopfRab Lf: header_discount_rate_ledvance
+        Rabatt: item_discount
+        Strafsatz: tax_rate
+        Wert: item_amount
+        Wert OBI: item_amount_customer
+        Wert Lf: item_amount_ledvance
+        BA-Wert: item_amount # same as PosWert
+        Lief-LS: item_delivery_number
+        MW%: tax_rate

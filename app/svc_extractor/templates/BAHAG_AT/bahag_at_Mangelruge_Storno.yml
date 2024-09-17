@@ -1,0 +1,17 @@
+issuer: BAHAG_AT
+name: Storno-Mängelrüge
+kind: credit
+template_id: 101072AT007
+
+inclusive_keywords:
+  - BAHAG|Bahag|Baus|BAUS|BAUHAUS
+  - Mängelrüge
+  - Storno
+
+fields:
+  document_number: Mängelrüge\s+(\d+)
+  branch: Niederlassung\s+(\d+)
+  amount: Gesamtbetrag\s+(\d.*?,\d{2})
+  supplier: 
+    - \n\s+Lieferant.*?\s([1-9]\d{5})\D
+    - Lieferant.*?\s([1-9]\d{5})\D

@@ -1,0 +1,25 @@
+issuer: BAHAG_SI
+name: Mängelrüge
+category: delivery
+kind: debit
+template_id: 101072SI002
+
+inclusive_keywords:
+  - BAUHAUS
+  - Belastungsanzeige (fehlmenge|Schaden)
+
+exclusive_keywords:
+  - Storno
+  - "[Ee]rsetzt|Erst.|ERSETZT" # do not process these docs!!!
+
+fields:
+  document_number: Mängelrügennummer\s+\n?(\d+)\s+Datum
+  purchase_order_number: Bestellung\s*(\d+)
+  delivery_number: Lieferscheinnummer\s+(\d{9})
+  branch: Niederlassung\s+(\d+)
+  supplier: Lieferant/Spediteur\s+(\d+)
+  amount: Gesamtbetrag\s+(\d*\.?\d+,\d+)
+  items: \d{6}\s+(\d{8})\s+(\d+)
+
+optional_fields:
+  - items

@@ -1,0 +1,20 @@
+issuer: REWE_DE
+name: Beleg
+category: price
+kind: debit
+template_id: 201001DE001
+
+inclusive_keywords:
+  - 'REWE - Zentral'
+  - 'Abw. Preise v. Vereinb'
+
+fields:
+  document_number: Beleg-Nr.\s(\d+)
+  delivery_number: Lieferscheinnummer\s(\d{9})
+  amount: Gesamtbetrag(?:.*\n){2}.*?([\d.]+,\d{2})\s+EUR
+  tax: SOFORTVERRECHNUNG\s+\S+\s+(\d+,\d+)
+  items: Abw. Preise v. Vereinb.\n.*?(-[\d.]+,0{4})\s{2,}(\d+,\d{4})\s{2,}(\S+)\s(\d+,\d)\s+(?:\d{2})\s+(-[\d.]+,0{4})\s{2,}(\d+,\d{4})
+    
+optional_fields:
+  - delivery_number
+  - items

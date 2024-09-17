@@ -1,0 +1,24 @@
+issuer: OBI_DE
+name: Retoure
+category: [return, quality, delivery, rebuild]
+kind: debit
+template_id: 161001DE007
+
+inclusive_keywords:
+  - OBI
+  - Retourenanzeige
+
+exclusive_keywords:
+  - Storno
+
+fields:
+  branch:
+    - R.*Ein.*?\s([0-5]\d{2})
+    - ([0-5]\d{2})\s+OBI
+  supplier: Lieferant.+(\d{4})
+  amount: Gesamt.+?[.+\n]?(\d+.?\d+)
+  document_number: Re[^il0-9]*?\:.*?0+(\d+)?\D
+  items: \d+.*?(\d{8,}).*?(\d+,\d{3})\s+(\d+,\d{4})\s+(\d+,\d{2})?\s+(\d+,\d{2})
+
+optional_fields:
+  - items

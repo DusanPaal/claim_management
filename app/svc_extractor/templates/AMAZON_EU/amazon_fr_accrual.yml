@@ -1,0 +1,23 @@
+issuer: AMAZON_FR
+kind: debit
+category: [bonus, promo]
+name: Accrual
+template_id: 119999FR001
+
+inclusive_keywords:
+  - AMAZON|Amazon
+  - Germany|Luxembourg|France
+  - TVA.*?FR
+  - MDF
+
+fields:
+  document_number: (?:Facture.no|Note.*?D.*?).*?(\d+)
+  supplier: '(?:No.De.*?TVA.|Numéro\s*TVA.)\s*(\w{2}.*)\s'
+  tax: Taux\s*Montant.HT\s*TVA\s*.*?(\d+.\d{2})%
+  amount:
+    - Montant Total\n\s+.*\n.*?(\S+.\d{2})\n
+    - (?:Total.*?Li.*Montant\s*Montant\s*Total\s*Add\w+)?(?:Montant.TTC)?\s*(?:\d.*?\.\d{2}\s*){0,3}(\d.*?\.\d{2})\s*.*?EUR
+
+optional_fields:
+  - supplier
+  - tax

@@ -1,0 +1,17 @@
+issuer: METRO_DE
+name: Retoure
+category: return
+kind: debit
+template_id: 151001DE003
+
+inclusive_keywords:
+  - Metro|METRO
+  - WARE GING ZURÜCK
+
+fields:
+  document_number: BELASTUNGSANZEIGE.*NR.*?(\d+)
+  amount: GESAMT.*?([0-9\.]+[,\.]\d{2})(?=\s?\-?\n)
+
+options:
+  replace:
+    - ['\s?-', " "]

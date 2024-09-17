@@ -1,0 +1,19 @@
+issuer: BAHAG_DE
+name: Stornoersetzung
+category: delivery
+kind: debit
+template_id: 101001DE008
+
+inclusive_keywords:
+  - '([Ee]rsetzt|Erst.|ERSETZT)\s+(Mängelrüge|MÄNGELRÜGE|MR|Mr)'
+
+exclusive_keywords:
+  - TSCHECH|Tschech
+  - "[Ee]rsetzt|Erst.|ERSETZT" # do not process these docs!!!
+
+fields:
+  document_number: (?:[Ee]rsetzt|ERSETZT|Erst).*(\d{12})
+  invoice_number: Ihre Rechnungs.Nr.\s+(\d+)
+  amount: Gesamtbetrag\s+EUR\s+(\d+[.]?\d+[,]?\d+)
+  supplier: Lieferant.*?\s([1-9]\d{5})\D
+  # documents are issued without tax rate

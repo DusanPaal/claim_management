@@ -1,0 +1,27 @@
+issuer: BAHAG_DE
+name: Storno-Belastungsanzeige
+kind: credit
+category: return
+template_id: 101001DE005
+
+inclusive_keywords:
+  - BAHAG|Bahag|Baus|BAUS|BAUHAUS
+  - Belastungsanzeige
+  - Storno
+
+exclusive_keywords:
+  - Mängelrüge
+  - TSCHECH|Tschech
+
+fields:
+  supplier: Lieferant.*?\s([1-9]\d{5})\D
+  document_number: 
+    - aus Retoure\s?\n?.*?(\d{12})
+    - Belegnummer\s+(\d+)
+  branch: Niederlassung\s*(\d{3})
+  amount:
+    - Gesamtbetrag\s*EUR\s*(\d+\.?\d*,\d+)
+    - Gutschriftsbetrag.*?([0-9.,]+\d{2})
+
+optional_fields:
+  - branch

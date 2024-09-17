@@ -1,0 +1,17 @@
+issuer: OBI_DE
+name: Mängelanzeigenstorno
+kind: credit
+category: delivery
+template_id: 161001DE006
+
+inclusive_keywords:
+  - OBI
+  - Maengelanzeigenstorno
+
+fields:
+  branch: R.*Ein.*?\s*?(\d{3})
+  supplier: Lieferant.+(\d{4})
+  document_number:
+    - (\d{4,})[\s.]Maengel
+    - Maengel.*?(\d{4,})
+  amount: Gesamt Betrag\n?.*?([0-9\.]+,\d{2})

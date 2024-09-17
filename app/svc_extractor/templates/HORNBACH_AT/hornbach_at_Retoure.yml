@@ -1,0 +1,20 @@
+issuer: HORNBACH_AT
+name: Retoure
+category: return
+kind: debit
+template_id: 211072AT002
+
+inclusive_keywords:
+  - Hornbach
+  - Retoure
+
+fields:
+  document_number: Retoure.*?(\d+/\d+)
+  invoice_number: Rechnungs-Nr.*?(900\d{6})
+  delivery_number: Lieferschein-Nr.*?(31\d{7})
+  amount: Summe brutto:\s+(?:- )([\d.,]+\d{2}) \s+EUR
+  items: (\d+)\s+(\d+)\s+(\S+)\s+(\S+)+\s+(?:ST|LE)\s+(\S+)\s+(?:- )(\S+)\s+(\S+)
+
+optional_fields:
+  - delivery_number
+  - invoice_number

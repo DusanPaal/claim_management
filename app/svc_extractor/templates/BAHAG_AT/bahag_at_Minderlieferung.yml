@@ -1,0 +1,22 @@
+issuer: BAHAG_AT
+name: Minderlieferung
+category: [penalty_general, penalty_quote, penalty_delay]
+kind: debit
+template_id: 101072AT002
+
+inclusive_keywords:
+  - BAHAG|Bahag|Baus|BAUS|BAUHAUS
+  - Belastungsanzeige
+  - Minderlieferung
+
+exclusive_keywords:
+  - Ersetz
+  - Storno
+
+fields:
+  document_number: (?:Belegnummer\s+|Rechnungsnummer\s+|[Nn]ummer\s+)(\d{10}|\d{7})
+  supplier: (?:Referenz|Beleg)datum.*\n.*?Lieferant.*?\s([1-9]\d{5})
+  amount: Belastungsbetrag.*?EUR\s*(\d*?\.?\d*,\d+)
+  tax: zuzüglich.+?(\d+,\d+)\s+?% # required for categorizing penalties
+  subtotals: Zwischensumme\s+([\d.]+,\d{2})\s+([\d.]+,\d{2}) # nicht geliefert / zu spät geliefert
+  items: \d{3}\s+(\d{10})\s+\d+\s+(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\s+(\S+)

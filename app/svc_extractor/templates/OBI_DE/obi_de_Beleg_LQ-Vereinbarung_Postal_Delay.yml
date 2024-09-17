@@ -1,0 +1,27 @@
+issuer: OBI_DE
+name: Beleg aus LQ-Vereinbarung
+category: penalty_delay
+kind: debit
+template_id: 161001DE010
+
+inclusive_keywords:
+  - OBI
+  - Lieferverzug
+
+exclusive_keywords:
+  - Unterlieferung
+
+fields:
+  branch: Beleg.*?Nr.*?DE(\d{3})\d{7}
+  supplier: Ihr Konto bei uns.*?\d([2,4]\d{3})
+  amount: Endbetrag.*?([\d.,]+)
+  document_number: Beleg.*?Nr.*?(DE\d{10})
+  purchase_order_number:
+    - Best.*?Nr.*?(\d+)
+    - Bestellung\s+(\d+)
+    - Bestellnummer.*?(\d+)
+    - Best.*?(\d{5,})
+  delivery_number: LS\s+(\d{9})
+
+optional_fields:
+  - delivery_number

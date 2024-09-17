@@ -1,0 +1,15 @@
+issuer: AMAZON_IT
+kind: debit
+category: penalty_general
+name: Konventionalstrafe
+template_id: 119999IT003
+
+inclusive_keywords:
+  - AMAZON|Amazon
+  - Italia
+  - VCB
+
+fields:
+  document_number: Numero.nota.di.debito.*?(\d+VCB)
+  supplier: Partita.IVA.Amazon.*?(\w{2,})
+  amount: Importo.Totale.lordo(?:.*?\n?)*([0-9\,]+\.\d{2})

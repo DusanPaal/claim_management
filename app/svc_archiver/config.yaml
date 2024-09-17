@@ -1,0 +1,52 @@
+dirs:
+  source: # list of source directories to be scanned for files to archive
+    - \\path\to\source\directoryA
+    - \\path\to\source\directoryB
+    - \\path\to\source\directoryC
+  destination: # list of destination directories to move files to during archivation
+    - \\path\to\destination\directoryA
+    - \\path\to\destination\directoryB
+
+user_notes:
+    # note tobe added to the end of user emails that contain the disputed documents
+    repeated_dispute_creation_failure: "WARNING: Claim Management has repeatedly failed to match the credit note to a DMS case."
+
+mails:
+  connection:
+    server:       # host server name
+    user_account: # user account name
+    mailbox:      # user mailbox address
+
+database:
+  host:     # (str) name of the database host server
+  port:     # (int) database port number on the host server
+  name:     # (str) name of the database
+  schema:   # (str) name of the database schema that contains the data table
+  table:    # (str) nama of the database table that contains the application-accessed data
+  user:     # (str) name of the database user account
+  password: # (str) password of the database user account
+  debug:    # (bool) enable/disable debug mode for database connection
+
+times:
+    # number of days to keep credit notes in the upload folder, where no DMS exists,
+    # before moving them to the archivation folder. negative values are capped to 0
+    credit_retention_time: 30
+
+states: # possible states of the documents in the processing pipeline
+  document_states:
+    document_registration_success: registered
+    document_extraction_failed: extraction_error
+    document_extraction_completed: extracted
+
+  claim_states:
+    claim_creation_completed: completed
+    claim_creation_failed: processing_error
+    claim_creation_duplicate: duplicate
+    claim_case_unmatched: case_unmatched
+
+  mail_states:
+    mail_completed_moved: done
+    mail_duplicate_moved: done
+    mail_failed_moved: manual
+    mail_extractionerror_moved: manual
+    mail_case_unmatched_moved: manual

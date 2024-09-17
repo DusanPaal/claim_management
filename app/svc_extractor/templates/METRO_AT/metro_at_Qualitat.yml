@@ -1,0 +1,16 @@
+issuer: METRO_AT
+name: Qualität
+category: quality
+kind: debit
+template_id: 151072AT003
+
+inclusive_keywords:
+  - METRO|Metro
+  - OESTERREICH|Oesterreich
+  - WIR BELASTEN IHR KONTO WIE FOLGT
+
+fields:
+  document_number: RECHN-NR.*?(\d+)
+  identifier: BE-NR.*?(\d+) #zmena !!!!
+  branch: BETRIEBSST.*?(\d+)/
+  amount: GESAMTBETRAG.*EUR.*?(\d+.\d{2})

@@ -1,0 +1,17 @@
+issuer: OBI_CH
+name: Belegstorno
+kind: credit
+template_id: 160074CH001
+
+inclusive_keywords:
+  - OBI
+  - Winterthur
+  - BELEGSTORNO
+
+fields:
+  branch: R.*Ein.*?\s*?(\d{3})
+  supplier: Lieferant\s*.*?:\s*.*?(\d{4})
+  document_number:
+    - BELEGSTORNO.*?\s*?([1-9]\d+)
+    - aus Warenretoure\D+(\d{4,})
+  amount: Gesamt.*?\n?.*?Betra.*?\n?.*?(\d+[.,]\d+)

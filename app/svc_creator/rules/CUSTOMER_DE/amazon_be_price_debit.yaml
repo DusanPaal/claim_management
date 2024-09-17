@@ -1,0 +1,30 @@
+company_code: "1001"
+threshold: 50
+category: price
+template_id: 119999BE002
+kind: debit
+tolerance: 0.01
+
+case_search:
+  title: document_number
+  cust_disputed: amount
+
+claim_create:
+  reference_by: invoice_number
+  reference_no: AMAZON DE
+  status_ac: tax_code
+  description: document_number
+  user: ZU.KIRALYOVA
+  processor: ZU.KIRALYOVA
+  coordinator: T.GLASER
+  responsible: MARTIN.BRAUN
+  attachment_name: <case_id>.pdf
+
+case_add:
+  reference_no: AMAZON DE
+  description: document_number
+  user: ZU.KIRALYOVA
+  processor: ZU.KIRALYOVA
+  coordinator: T.GLASER
+  responsible: MARTIN.BRAUN
+  attachment_name: <case_id>.pdf

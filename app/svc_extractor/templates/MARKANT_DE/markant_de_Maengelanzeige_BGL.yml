@@ -1,0 +1,31 @@
+issuer: MARKANT_DE
+name: Mängelanzeige-Preisänderung
+category: [delivery, price]
+kind: debit
+template_id: 141001DE002
+
+inclusive_keywords:
+  - Markant
+  - Beleg.*?BGL
+
+exclusive_keywords:
+  - RÜCKBELASTUNG
+
+fields:
+  archive_number: Archivnummer.*?(\d+)
+  document_number: Beleg.*Nr.*?(\w+)
+  invoice_number: Urspr.Datum.*?(4\d{8})
+  delivery_number: Liefersch.*?Nr.*?(\d{9})
+  supplier: Warenempfänger\s*(\d+)
+  tax: GESAMT\s*EUR(?:\s*(?:\d+\.)?\d+.\d+.?\s*){1,2}((?:\d+\.)?\d+.\d+)
+  amount: GESAMT\s*EUR(?:\s*(?:\d+\.)?\d+.\d+.?\s*){1,3}((?:\d+\.)?\d+.\d+)
+  items:
+    - '\d+,00\s+([\d.]+,\d{2})\n\s+([\d.]+,\d{3})\sPCE\s+([\d.]+,\d{3})\sPCE\s+([\d.]+,\d{4})?\s+([\d.]+,\d{4})?'
+    - '\d+,00\s+([\d.]+,\d{2})-?\n(?:.*)\s+([\d.]+,\d{3})\sPCE\s+([\d.]+,\d{3})\sPCE\s+([\d.]+,\d{4})?\s+([\d.]+,\d{4})?'
+    - '\d+,00\s+([\d.]+,\d{2})-?\n(?:.*)\s+([\d.]+,\d{3})?\sPCE\s+([\d.]+,\d{3})\sPCE\s+([\d.]+,\d{4})?\s+([\d.]+,\d{4})?'
+  email: ([\w.-]+@\s?\S+?)\.?$
+
+optional_fields:
+  - delivery_number # not always stated on docs
+  - invoice_number # not always stated on docs
+  - email

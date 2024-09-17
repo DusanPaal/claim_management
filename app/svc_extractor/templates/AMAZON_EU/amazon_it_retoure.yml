@@ -1,0 +1,16 @@
+issuer: AMAZON_IT
+kind: debit
+category: return
+name: Retoure
+template_id: 119999IT006
+
+inclusive_keywords:
+  - AMAZON|Amazon
+  - LEL98
+  - '[Rr]eturn'
+
+fields:
+  document_number: 
+    - Numero Nota di\s+(\d{10})
+    - Numero Fattura.*?(\d+)
+  amount: Totale Fattura\s*.?(?:\d.*?\.\d{2}\s*){3}(\d.*?\.\d{2})

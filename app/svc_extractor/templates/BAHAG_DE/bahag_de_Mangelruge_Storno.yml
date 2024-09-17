@@ -1,0 +1,24 @@
+issuer: BAHAG_DE
+name: Storno-Mängelrüge
+category: delivery
+kind: credit
+template_id: 101001DE009
+
+inclusive_keywords:
+  - BAHAG|Bahag|Baus|BAUS|BAUHAUS
+  - Storno
+  - Mängelrüge
+
+exclusive_keywords:
+  - TSCHECH|Tschech
+
+fields:
+  document_number: Mängelrügennummer\s+\n?(\d+)\s+Datum
+  delivery_number: Lieferscheinnummer\s+(\d{9})
+  branch: Niederlassung\s+(\d+)
+  supplier: Lieferant.*?\s([1-9]\d{5})\D
+  amount: Gesamtbetrag\s+(\d*\.?\d+,\d+)
+  items: \d{6}\s+(\d{8})\s+(\d+)
+
+optional_fields:
+  - items

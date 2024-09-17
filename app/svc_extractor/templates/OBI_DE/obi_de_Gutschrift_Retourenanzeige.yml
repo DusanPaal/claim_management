@@ -1,0 +1,14 @@
+issuer: OBI_DE
+name: Gutschrift aus Retourenanzeige
+kind: credit
+template_id: 161001DE003
+
+inclusive_keywords:
+  - OBI
+  - Gutschrift.*?Retourenanzeige
+
+fields:
+  branch: R.*E.Nr.*?\s*?(\d{3})
+  supplier: Lieferant.+(\d{4})
+  amount: Gesamt.+?[.+\n]?(\d+.?\d+)
+  document_number: Gutschrift.+?\w*?(\d+)

@@ -1,0 +1,19 @@
+issuer: OBI_SI
+name: Mängelrüge
+category: delivery
+kind: debit
+template_id: 161072SI001
+
+inclusive_keywords:
+  - OBI
+  - BELASTUNGSANZEIGE
+  - Mängelrüge
+  - Ljubljana
+
+fields:
+  branch: R.*Ein.*?\s*?(\d{3})
+  supplier: Lieferant\s*.*?:\s*.*?(\d{4})
+  document_number: BELASTUNGSANZEI.*\n?.*?(\d{10})
+  invoice_number: Ih.*RG.*?N.*?(\d+)
+  delivery_number: Lief.LS.*?(\d{9})
+  amount: Gesamt.*?\n?.*?Betra.*?\n?.*?(\d+[.,]\d+)

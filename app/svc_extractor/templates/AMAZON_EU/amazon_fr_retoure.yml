@@ -1,0 +1,14 @@
+issuer: AMAZON_FR
+kind: debit
+category: return
+name: Retoure
+template_id: 119999FR005
+
+inclusive_keywords:
+  - AMAZON|Amazon
+  - LEL45|France
+  - Retour
+
+fields:
+  document_number: Numéro Note de Débit:\s+(\d{10})
+  amount: (?:Total.*?Li.*Montant\s*Montant\s*Total\s*Add\w+)?(?:Montant.TTC)?\s*(?:\d.*?\.\d{2}\s*){0,3}(\d.*?\.\d{2})\s*.*?EUR

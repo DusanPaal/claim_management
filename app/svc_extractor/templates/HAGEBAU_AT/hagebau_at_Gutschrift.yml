@@ -1,0 +1,16 @@
+issuer: HAGEBAU_AT
+name: Gutschrift
+kind: credit
+template_id: 121072AT002
+
+inclusive_keywords:
+  - "[Hh]agebau|HAGEBAU"
+  - GUTSCHRIFT
+
+fields:
+  document_number: Belegnummer\D+(\d{10}) # number of the credit note
+  backreference_number: Betrifft\D+(\d{10}) # number of the original debit note
+  amount: 
+    - Rechnungsbetrag\D([0-9.,]+)
+    - Rechnungsbetrag.*?\s*?(\d+.*)
+  

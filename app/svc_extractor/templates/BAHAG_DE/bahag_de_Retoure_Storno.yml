@@ -1,0 +1,20 @@
+issuer: BAHAG_DE
+name: Storno-Retoure
+category: return
+kind: credit
+template_id: 101001DE014
+
+inclusive_keywords:
+  - BAHAG|Bahag|Baus|BAUS|BAUHAUS
+  - Belastungsanzeige
+  - Retoure
+  - Storno|Stornofall
+
+exclusive_keywords:
+  - Mängelrüge
+  - TSCHECH|Tschech
+
+fields:
+  document_number: Storno\s+Belastungsanzeige\s+aus\s+Retoure\s+\n?\w+\.\s+\d+\s+(\d+)
+  amount: Gesamtbetrag\s+EUR\s+(\d*\.?\d+,\d+)
+  supplier: Lieferant.*?\s([1-9]\d{5})\D

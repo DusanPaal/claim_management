@@ -1,0 +1,27 @@
+issuer: ROLLER_DE
+name: Belastungsanzeige
+category: return
+kind: debit
+template_id: 171001DE005
+
+inclusive_keywords:
+  - ROLLER
+  - Belastungsanzeige
+  - MUSTER|Muster|Lechtmittelumstellung
+
+exclusive_keywords:
+  - GUTSCHRIFT|Gutschrift
+
+fields:
+  document_number: Belegnummer.*?(\d+)
+  amount: (?:.*EUR\n){2}.*?(\S+)\s+EUR
+
+# OCR glitch corrections
+options:
+  replace:
+    - ['(\S+\s+EUR)\n(\d+\s+\d+(?:\s+\d+)?)', '\2 \1']
+    - ['(\S+)\s(\S+)\s(EUR)\s(EUR)', '\2 \3\n\1 \4']
+    - ['(8)(\s+00)(\s\d+\s+.*?EUR\n)', '\1\3'] # extremly rare glitch
+    - ['\nA\n', '\n'] # extremly rare glitch
+    - ['\nAV\n', '\n'] # extremly rare glitch
+    - ["ROL - ER", "ROLLER"] # extremly rare glitch

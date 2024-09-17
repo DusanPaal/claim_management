@@ -1,0 +1,30 @@
+company_code:       # (str) A 4-digit coee that represents the company code of the document's country of origin.
+threshold:          # (float) The maximum document amount for writing off the claim.
+category:           # (str) The category of the document (delivery, return, bonus, ...).
+template_id:        # (str) The template ID of the document.
+kind:               # (str) The kind of the document (credit/debit).
+tolerance:          # (float) Tolerance for the rounding of the document total amount.
+
+case_search:        # (dict) The search parameters for existing cases in SAP DMS.
+  title:            # (str) Text to control the naming of the case title.
+  cust_disputed:    # (str) parameter to control which parameter is used for the amount of the claim.
+
+claim_create:       # Parameters for creating of new claims in DMS
+  reference_by:     # (str) Parameter to control the format of the 'Reference by' value of the claim in DMS.
+  reference_no:     # (str) Parameter to control the format of the 'Reference no' value of the claim in DMS.
+  status_ac:        # (str) Parameter to control the value to be written into the 'Status AC' field in DMS
+  description:      # (str) Parameter to control the value to be written into the 'Description' field in DMS
+  user:             # (str) Parameter to control the value to be written into the 'User' field in DMS
+  processor:        # (str) Parameter to control the value to be written into the 'Processor' field in DMS
+  coordinator:      # (str) Parameter to control the value to be written into the 'Coordinator' field in DMS
+  responsible:      # (str) Parameter to control the value to be written into the 'Responsible' field in DMS
+  attachment_name: <case_id>.pdf # (str) Parameter to control the naming of the PDF to be attached to the claim in DMS. The <case_id> will be replaced by the case ID of the case to be added to the claim
+
+case_add:           # (dict) the parameters for adding the case to an exixting claim in DMS
+  reference_no:     # (str) Parameter to control the value to be written into the 'Reference no.' field in DMS
+  description:      # (str) Parameter to control the value to be written into the 'Description' field in DMS
+  user:             # (str) Parameter to control the value to be written into the 'User' field in DMS
+  processor:        # (str) Parameter to control the value to be written into the 'Processor' field in DMS
+  coordinator:      # (str) Parameter to control the value to be written into the 'Coordinator' field in DMS
+  responsible:      # (str) Parameter to control the value to be written into the 'Responsible' field in DMS
+  attachment_name: <case_id>.pdf # (str) text format to control the naming of the PDF to be attached to the claim in DMS. The <case_id> will be replaced by the case ID of the case to be added to the claim

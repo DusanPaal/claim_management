@@ -1,0 +1,36 @@
+issuer: ROLLER_DE
+name: Belastungsanzeige
+category: [return, rebuild]
+kind: debit
+template_id: 171001DE006
+
+inclusive_keywords:
+  - ROLLER
+  - Belastungsanzeige
+  - RETOURE
+
+exclusive_keywords:
+  - GUTSCHRIFT|Gutschrift
+
+fields:
+  document_number: 
+    - Belastungsanzeige.*?\s(\w{8})\n
+    - Belegnummer.*?(\d+)
+  amount: 
+    - (?:.*EUR\n)(?:.*\n){2,}.*?(\S+)\s+EUR
+    - BRUTTO\s+(\S+)\sEUR
+  return_number: Retourenschein.*?(\d+)
+
+optional_fields:
+  - return_number
+
+# OCR glitch corrections
+options:
+  replace:
+    - ["Belastungs anzeige", "Belastungsanzeige"]
+    - ["Belastung s anzeige", "Belastungsanzeige"]
+    - ["Belastungsanz eige", "Belastungsanzeige"]
+    - ["Bela astungsanzeige", "Belastungsanzeige"]
+    - ["Belastung san z e ig e", "Belastungsanzeige"]
+    - ['(Belastungsanzeige)\n(.*?\w{8})', '\1 \2']
+    - ['.*?(\w{8})\n(Belastungsanzeige)', '\2 \1\n']

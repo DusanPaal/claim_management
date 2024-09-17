@@ -1,0 +1,60 @@
+issuer: OBI_AT
+name: Belastungsanzeige
+category: [delivery, price]
+kind: debit
+template_id: 161072AT001
+
+inclusive_keywords:
+  - OBI
+  - BELASTUNGSANZEIGE
+  - ATU\d{8}
+
+exclusive_keywords:
+  - Storno
+
+fields:
+  branch:
+    - (?:Markt|MARKT)(?:.*?Nummer)?\s+(\d{1,4})
+    - R.*Ein.*?\n?.*?(\d{3})
+  supplier: Lieferant.*?\n?.*?(4844|1153)\n
+  document_number:
+    - BELASTUNGSANZEI.*\n?.*?(\d{10})
+    - (\d{10})\nBELASTUNGSANZEI
+  invoice_number: Ih.*RG.*?N.*?(900\d{6})
+  delivery_number: Lief.*?LS.*?(313\d{6})
+  amount:
+    - Ge[sş]amt.*?\n?.*?[Bb]etrag.*?\n?.*?([1-9][0-9.,\s]+\d{2})
+    - ([0-9\.,]*\d{2})\s+EUR\nGesamt
+  items: \s+(\d+.*?\d+,\d{2})\n
+
+optional_fields:
+  - items
+  - delivery_number
+
+options:
+  replace:
+    # number 6 is sometimes translated by the OCR engine as 'b' character
+    - ["bb", "66"]
+    - ['BELASTUNGSANZEIGE\s+(\d+)b(\d+)', 'BELASTUNGSANZEIGE \g<1>6\g<2>']
+    - ['BELASTUNGSANZEIGE\s+b(\d+)', 'BELASTUNGSANZEIGE 6\g<1>']
+    - ['BELASTUNGSANZEIGE\s+(\d+)b', 'BELASTUNGSANZEIGE \g<1>6']
+
+    # number 6 is sometimes translated by the OCR engine as 'L' character
+    - ['BELASTUNGSANZEIGE\s+(\d+)L(\d+)', 'BELASTUNGSANZEIGE \g<1>6\g<2>']
+    - ['BELASTUNGSANZEIGE\s+L(\d+)', 'BELASTUNGSANZEIGE 6\g<1>']
+    - ['BELASTUNGSANZEIGE\s+(\d+)L', 'BELASTUNGSANZEIGE \g<1>6']
+
+    # number 6 is sometimes translated by the OCR engine as 'E' character
+    - ['BELASTUNGSANZEIGE\s+(\d+)E(\d+)', 'BELASTUNGSANZEIGE \g<1>6\g<2>']
+    - ['BELASTUNGSANZEIGE\s+E(\d+)', 'BELASTUNGSANZEIGE 6\g<1>']
+    - ['BELASTUNGSANZEIGE\s+(\d+)E', 'BELASTUNGSANZEIGE \g<1>6']
+
+    # number 8 is sometimes translated by the OCR engine as 'B' character
+    - ['BELASTUNGSANZEIGE\s+(\d+)B(\d+)', 'BELASTUNGSANZEIGE \g<1>8\g<2>']
+    - ['BELASTUNGSANZEIGE\s+B(\d+)', 'BELASTUNGSANZEIGE 8\g<1>']
+    - ['BELASTUNGSANZEIGE\s+(\d+)B', 'BELASTUNGSANZEIGE \g<1>8']
+
+    # number 0 is sometimes translated by the OCR engine as 'O' character
+    - ['BELASTUNGSANZEIGE\s+(\d+)O(\d+)', 'BELASTUNGSANZEIGE \g<1>0\g<2>']
+    - ['BELASTUNGSANZEIGE\s+O(\d+)', 'BELASTUNGSANZEIGE 0\g<1>']
+    - ['BELASTUNGSANZEIGE\s+(\d+)O', 'BELASTUNGSANZEIGE \g<1>0']

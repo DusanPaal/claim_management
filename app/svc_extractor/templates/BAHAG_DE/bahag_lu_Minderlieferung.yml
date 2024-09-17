@@ -1,0 +1,24 @@
+issuer: BAHAG_DE
+name: Minderlieferung
+category: [penalty_general, penalty_quote, penalty_delay]
+kind: debit
+template_id: 101001LU016
+
+inclusive_keywords:
+  - BAHAG|Bahag|Baus|BAUS|BAUHAUS
+  - Luxemburg
+  - Belastungsanzeige
+  - Minderlieferung
+
+exclusive_keywords:
+  - Storno
+  - "[Ee]rsetzt|Erst.|ERSETZT" # do not process these docs!!!
+
+fields:
+  document_number: (?:Belegnummer\s+|Rechnungsnummer\s+|[Nn]ummer\s+)(\d{10}|\d{7})
+  supplier: Lieferant.*?\s([1-9]\d{5})\D
+  amount: Belastungsbetrag.*?EUR\s*(\d*?\.?\d*,\d+)
+  tax: zuzüglich.+?(\d+,\d+)\s+?%
+  subtotals: Zwischensumme\s+([\d.]+,\d{2})\s+([\d.]+,\d{2}) # nicht geliefert / zu spät geliefert
+  branch: \d{3}\s\d{10}\s(\d{3})
+  items: \d{3}\s+(\d{10})\s+\d+\s+(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\s+(\S+)
